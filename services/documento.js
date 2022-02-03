@@ -15,7 +15,7 @@ async function getById(idCad){
 
 
 async function createNew(documento){
-   const res = await db.query(`INSERT INTO documento (idCad, tipo, numero, digito, dtExp, dtValidade, emissor) VALUES (?, ?, ?, ?, ?, ?, ?);`, [documento.idCad, documento.tipoDoc, documento.numeroDoc, documento.digito, documento.dtExp, documento.dtValidade, documento.emissor]);
+   const res = await db.query(`INSERT INTO documento (idCad, tipo, numero, digito, dtExp, dtValidade, emissor) VALUES (?, ?, ?, ?, ?, ?, ?);`, [documento.idCad, documento.tipo, documento.numero, documento.digito, documento.dtExp, documento.dtValidade, documento.emissor]);
 
    if (res.affectedRows) {
       const result = await db.query(`SELECT * FROM documento WHERE idCad= ?;`, [documento.idCad]);
@@ -27,7 +27,7 @@ async function createNew(documento){
 }
 
 async function update(documento, idCad){
-   const res = await db.query(`UPDATE documento SET tipoDoc = ?, numeroDoc = ?, digito = ?, dtExp = ?, dtValidade = ? WHERE idCad = ?;`, [documento.tipoDoc, documento.numeroDoc, documento.digito , documento.dtExp, documento.dtValidade, documento.emissor, idCad]);
+   const res = await db.query(`UPDATE documento SET tipo = ?, numero = ?, digito = ?, dtExp = ?, dtValidade = ? WHERE idCad = ?;`, [documento.tipo, documento.numero, documento.digito , documento.dtExp, documento.dtValidade, documento.emissor, idCad]);
 
    if (res.affectedRows) {
    
@@ -47,7 +47,7 @@ async function deleteDoc(documento){
    const res = await db.query(`DELETE from documento where idCad = ?;`, [documento.idCad]);
 
    if (res.affectedRows) {
-      const result = await db.query(`SELECT idCad, idDoc, tipoDoc, numeroDoc, digito, dtExp, dtValidade, emissor FROM documento WHERE idCad= ?;`, [documento.idCad]);
+      const result = await db.query(`SELECT idCad, idDoc, tipo, numero, digito, dtExp, dtValidade, emissor FROM documento WHERE idCad= ?;`, [documento.idCad]);
       return result;
    } else {
       return null;
@@ -56,7 +56,7 @@ async function deleteDoc(documento){
 
 async function update(documento, idCad){
 
-   const res = await db.query(`UPDATE documento SET tipoDoc = ?, numeroDoc = ? , digito = ?, dtExp = ?, dtValidade = ?, emissor = ? WHERE idCad = ?;`, [documento.tipo, documento.numero, documento.digito, documento.dtExp, documento.dtValidade, documento.emissor, idCad])
+   const res = await db.query(`UPDATE documento SET tipo = ?, numero = ? , digito = ?, dtExp = ?, dtValidade = ?, emissor = ? WHERE idCad = ?;`, [documento.tipo, documento.numero, documento.digito, documento.dtExp, documento.dtValidade, documento.emissor, idCad])
 
    if (res.affectedRows) {
       const result = await db.query(`SELECT idCad, idDoc, tipo, numero, digito, dtExp, dtValidade, emissor FROM documento WHERE idCad= ?;`, [idCad]);

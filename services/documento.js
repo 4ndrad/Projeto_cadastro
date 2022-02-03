@@ -2,7 +2,7 @@ const db = require('../config/db');
 
 //GET Documento
 async function getAll(){
-    const rows = await db.query(`SELECT * FROM documento ORDER BY idDoc;`, []);
+    const rows = await db.query(`SELECT  idCad, idDoc, tipo, numero, digito, dtExp, dtValidade, emissor FROM documento ORDER BY idDoc;`, []);
     console.log("Dados resgatados")
     return rows;
 }

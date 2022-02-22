@@ -2,9 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
+const cors = require('cors');
 
 
-
+app.use(cors({
+    origin:'*'
+}))
 app.use(bodyParser.json());
 app.use(
 bodyParser.urlencoded({
@@ -31,6 +34,7 @@ const adminRouter = require('./routes/admin');
 const documentoRouter = require('./routes/documento');
 const loginRouter = require('./routes/login');
 const senhaRouter = require('./routes/senha');
+const { required } = require('nodemon/lib/config');
 
 
 app.use('/cadastro', cadastroRouter);

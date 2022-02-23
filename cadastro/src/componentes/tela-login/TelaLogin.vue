@@ -103,7 +103,7 @@ export default {
   color: white;
 }
 
-button:hover {
+.botao:hover {
   font-weight: bold;
   background-color: #e64a1a;
   color: #ffffff;
@@ -121,14 +121,15 @@ button:hover {
   color: white;
 }
 
-.botao:hover {
-  font-weight: bold;
-  text-decoration: none;
-  color: white;
-}
-
 .botao__padrao {
   border: none;
   border-radius: 10px;
+}
+
+.botao__padrao:hover {
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+  background-color: #e64a1a;
 }
 </style>

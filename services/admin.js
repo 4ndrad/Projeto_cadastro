@@ -3,7 +3,7 @@ const db = require('../config/db');
 
 
 async function getCadastro() {
-    const rows = await db.query(`SELECT idCad, cpfCnpj, nome, sobreNome, razaoSocial, DtNascFund FROM cadastro ORDER BY Nome;`, []);
+    const rows = await db.query(`SELECT idCad, cpfCnpj, nome, sobreNome, razaoSocial, dtNascFund FROM cadastro ORDER BY Nome;`, []);
     return rows;
 }
 
@@ -29,12 +29,13 @@ async function getAll() {
       
         let cadItem = {
             idCad: item.idCad,
+            cpfCnpj: item.cpfCnpj,
             nome: item.nome,
             sobreNome: item.sobreNome,
             razaoSocial: item.razaoSocial,
-            DtNascFund: item.DtNascFund,
+            dtNascFund: item.dtNascFund,
             documentos: documentos.filter(doc => doc.idCad == item.idCad),
-            enderecos:  enderecos.filter(end => end.idCad == item.idCad) 
+            enderecos: enderecos.filter(end => end.idCad == item.idCad) 
         }
         
         //finalizar com

@@ -37,21 +37,24 @@
 </template>
 
 <script>
-import Login from "../../domain/dados/Login";
 
 export default {
   data() {
     return {
       titulo: "LOGIN",
-      usuario: new Login(),
+      usuario: {}
     };
   },
   methods: {
     loga() {
       this.$http
         .post("login", this.usuario)
-        .then((res) => res.json(), (this.usuario = new Login()));
-      this.$router.push({ name: "login" });
+        .then((res) => {
+          console.log(res);
+          localStorage.setItem("token", res.data.access_token);
+          this.$router.push({ name: 'home' });
+        })
+        .catch((erro) => console.log(erro));
     },
   },
 };

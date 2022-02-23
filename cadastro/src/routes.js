@@ -1,7 +1,7 @@
 import Cadastro from './componentes/cadastro-usuario/Cadastro.vue';
 import Login from './componentes/tela-login/TelaLogin.vue';
 import Admin from './componentes/admin/Admin.vue';
-import Pagina from './componentes/pagina-inicial/PaginaInicial.vue';
+import Home from './componentes/home/Home.vue';
 import Esqueceu from './componentes/esqueceu/Esqueceu.vue';
 
 export const routes = [
@@ -12,9 +12,9 @@ export const routes = [
     },
 
     {
-        path: '/pagina',
-        name: 'pagina',
-        component: Pagina
+        path: '/home',
+        name: 'home',
+        component: Home
     },
 
     {

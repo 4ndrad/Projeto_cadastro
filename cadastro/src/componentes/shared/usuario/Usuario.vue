@@ -70,7 +70,7 @@ export default {
         let exp = new RegExp(this.filtro.trim(), "i");
         return this.cadastros.filter((cadastro, documento, endereco) => exp.test(cadastro.idCad));
       } else {
-        return this.cadastros;
+        return this.cadastros
       }
     },
   }

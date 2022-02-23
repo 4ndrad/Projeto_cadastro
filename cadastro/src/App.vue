@@ -3,7 +3,7 @@
     <transition name="pagina">
       <router-view />
     </transition>
-    <img class="logo" width="230" height="200" alt="Vue logo" src="./assets/logo.png">
+    <img class="logo" width="220" height="200" alt="Vue logo" src="./assets/logo.png">
   </div>
 </template>
 
@@ -15,7 +15,7 @@ export default {};
 
 body{
   background-color: black;
-}
+}*
 
 .pagina-enter,
 .pagina-leave-active {

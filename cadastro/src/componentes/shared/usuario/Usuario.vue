@@ -29,7 +29,8 @@
           <li>Emissor: {{ documento.emissor }}</li>
           
           <meu-botao rotulo="Remover" tipo="button" @botaoAtivado="removeDocumento(cadastro)" :confirmacao="true" estilo="perigo" /> 
-           <router-link :to="{name: 'alterarDocumento', params:{id: cadastro.idCad}}"><meu-botao rotulo="Alterar documento" tipo="button" :confirmacao="true" estilo="padrão" />  </router-link> 
+          <router-link :to="{ name: 'alterarDocumento' }"> <meu-botao rotulo="Alterar " tipo="button" :confirmacao="true" estilo="perigo" /></router-link>
+         
         </ul>
       </li>
 
@@ -46,6 +47,7 @@
           <li>UF: {{ endereco.uf }}</li>
           <li>Típo:{{ endereco.tipo }}</li>
            <meu-botao rotulo="Remover " tipo="button" @botaoAtivado="removeEndereco(cadastro)" :confirmacao="true" estilo="perigo" />  
+           
         </ul>
       </li>
     </ul>
@@ -65,9 +67,8 @@ export default {
     };
   },
   created() {
-      this.resource = this.$resource('admin');
-      this.resource
-      .query()
+    this.$http
+      .get("admin")
       .then((res) => res.json())
       .then(
         (cadastros) => {
@@ -75,8 +76,6 @@ export default {
         },
         (err) => console.log(err)
       );
-  
-    
   },
   computed: {
     filtroCad() {
@@ -124,7 +123,6 @@ export default {
         
     },
     removeDocumento(cadastro){
- 
        this.$http
       .delete(`http://localhost:3000/documento/${cadastro.idCad}`)
         .then(
@@ -191,4 +189,3 @@ li {
   margin-bottom: 7px;
 }
 </style>
-

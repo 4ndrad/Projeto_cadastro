@@ -14,6 +14,8 @@
       <li>Sobrenome: {{ cadastro.sobreNome }}</li>
       <li>Razão Social: {{ cadastro.razaoSocial }}</li>
       <li>Data de criação: {{ cadastro.dtNascFund }}</li>
+       <meu-botao rotulo="Deletar usuario" tipo="button" @botaoAtivado="removeCadastro(cadastro)" :confirmacao="true" estilo="perigo" />  
+       
       <br />
       <li>
         <h1 class="admin__titulo">Documentos</h1>
@@ -25,6 +27,9 @@
           <li>Data Expedição: {{ documento.dtExp }}</li>
           <li>Validade: {{ documento.dtValidade }}</li>
           <li>Emissor: {{ documento.emissor }}</li>
+          
+          <meu-botao rotulo="Remover" tipo="button" @botaoAtivado="removeDocumento(cadastro)" :confirmacao="true" estilo="perigo" /> 
+           <router-link :to="{name: 'alterarDocumento', params:{id: cadastro.idCad}}"><meu-botao rotulo="Alterar documento" tipo="button" :confirmacao="true" estilo="padrão" />  </router-link> 
         </ul>
       </li>
 
@@ -40,13 +45,19 @@
           <li>Município: {{ endereco.municipio }}</li>
           <li>UF: {{ endereco.uf }}</li>
           <li>Típo:{{ endereco.tipo }}</li>
+           <meu-botao rotulo="Remover " tipo="button" @botaoAtivado="removeEndereco(cadastro)" :confirmacao="true" estilo="perigo" />  
         </ul>
       </li>
     </ul>
   </div>
 </template>
 <script>
+import Botao from '../botao/Botao.vue';
+
 export default {
+  components: { 
+       'meu-botao': Botao
+  },
   data() {
     return {
       cadastros: [],
@@ -54,8 +65,9 @@ export default {
     };
   },
   created() {
-    this.$http
-      .get("admin")
+      this.resource = this.$resource('admin');
+      this.resource
+      .query()
       .then((res) => res.json())
       .then(
         (cadastros) => {
@@ -63,18 +75,85 @@ export default {
         },
         (err) => console.log(err)
       );
+  
+    
   },
   computed: {
     filtroCad() {
       if (this.filtro) {
         let exp = new RegExp(this.filtro.trim(), "i");
-        return this.cadastros.filter((cadastro, documento, endereco) => exp.test(cadastro.idCad));
+        return this.cadastros.filter((cadastro) => exp.test(cadastro.idCad))
+        
       } else {
-        return this.cadastros
+        return this.cadastros;
       }
     },
+  },
+  methods:{
+    removeCadastro(cadastro){
+      
+         this.$http 
+        .delete(`documento/${cadastro.idCad}`)
+         .then(
+          () => {
+            console.log('cadastro removido com sucesso') 
+          })
+          
+          this.$http
+        .delete(`endereco/${cadastro.idCad}`)
+         .then(
+          () => {
+            
+        this.$http
+        .delete(`cadastro/${cadastro.idCad}`)
+        .then(
+          () => {
+            let indice = this.cadastros.indexOf(cadastro); // acha a posição da foto na lista
+            this.cadastros.splice(indice, 1); // a instrução altera o array
+            alert ('usuario removido com sucesso') 
+          }, 
+          err => {
+            alert('Não foi possível remover o usuario, recarregue a pagina e tente mais uma vez!') ;
+            console.log(err);
+          }
+        )
+            console.log('cadastro removido com sucesso') 
+          })
+
+        
+        
+    },
+    removeDocumento(cadastro){
+ 
+       this.$http
+      .delete(`http://localhost:3000/documento/${cadastro.idCad}`)
+        .then(
+          () => {
+          
+            alert ('Documento removido com sucesso, recarregue a página.') 
+          }, 
+          err => {
+            alert('Não foi possível remover o usuario') ;
+            console.log(err);
+          }
+        )
+    }, 
+    removeEndereco(cadastro){
+        this.$http
+      .delete(`http://localhost:3000/endereco/${cadastro.idCad}`)
+        .then(
+          () => {
+          
+            alert ('Endereço removido com sucesso, recarregue a página.') 
+          }, 
+          err => {
+            alert('Não foi possível remover o usuario') ;
+            console.log(err);
+          }
+        )
+    }
   }
-};
+}
 </script>
 <style scoped>
 * {
@@ -112,3 +191,4 @@ li {
   margin-bottom: 7px;
 }
 </style>
+

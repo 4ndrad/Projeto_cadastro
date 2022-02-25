@@ -54,11 +54,21 @@ export default {
     .botao-perigo {
         background: firebrick;
         color: white;
+        border: none;
+    }
+
+    .botao-perigo:hover{
+        font-weight: bold;
     }
 
     .botao-padrao {
         background: darkcyan;
         color: white;
+        border: none;
+    }
+
+    .botao-padrao:hover{
+        font-weight: bold;
     }
 
 </style>

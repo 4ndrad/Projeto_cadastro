@@ -4,18 +4,18 @@
       <div class="div__titulo">
         <h1 class="titulo">{{ titulo }}</h1>
       </div>
-
+      <p class="invalide" v-if="mensagemErro">{{ mensagemErro }}</p>
       <input
         type="search"
         class="acesso"
-        placeholder="cpfCnpj"
+        placeholder="CPF - CNPJ"
         v-model="usuario.cpfCnpj"
       />
       <br /><br />
       <input
         type="password"
         class="senha"
-        placeholder="senha"
+        placeholder="Senha"
         v-model="usuario.senha"
       />
       <br /><br />
@@ -37,12 +37,12 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
       titulo: "LOGIN",
-      usuario: {}
+      usuario: {},
+      mensagemErro: "",
     };
   },
   methods: {
@@ -51,10 +51,16 @@ export default {
         .post("login", this.usuario)
         .then((res) => {
           console.log(res);
-          localStorage.setItem("token", res.data.access_token);
-          this.$router.push({ name: 'home' });
+          this.$store.commit("DEFINIR_USUARIO_LOGADO", {
+            idCad: res.data[0].idCad,
+          });
+          this.$router.push({ name: "home" });
         })
-        .catch((erro) => console.log(erro));
+        .catch((err) => {
+           if ( err, new Error){
+             this.mensagemErro = 'CPF - CNPJ ou Senha inválidos'
+           }
+        });
     },
   },
 };
@@ -134,5 +140,10 @@ export default {
   text-decoration: none;
   color: white;
   background-color: #e64a1a;
+}
+
+.invalide {
+  text-decoration: none;
+  color: red;
 }
 </style>

@@ -5,6 +5,8 @@
         <h1 class="esqueceu__titulo">Alterar senha</h1>
       </div>
 
+      <p class="invalide" v-if="mensagemErro">{{ mensagemErro }}</p>
+
       <div class="erro" v-show="errors.has('esqueceu-cpfCnpj')">
         {{ errors.first("esqueceu-cpfCnpj") }}
       </div>
@@ -85,17 +87,21 @@ export default {
   data() {
     return {
       alterar: new Alterar(),
+      mensagemErro: "",
     };
   },
 
   methods: {
     muda() {
-      this.$http
-        .put("senha", this.alterar)
-        .then((res) => res.json(), this.alterar = new Alterar(),(err)=>{
-          console.log(err);
-          throw new Error ('Não foi possível alterar senha');
-        });
+      this.$http.put("senha", this.alterar).then(
+        (res) => res.json(),
+        (this.alterar = new Alterar()),
+        (err) => {
+          if ( err, new Error){
+             this.mensagemErro = 'CPF - CNPJ ou Senha inválidos'
+           }
+        }
+      );
     },
 
     confirmacao() {
@@ -103,6 +109,8 @@ export default {
         if (success) {
           this.$router.push({ name: "login" });
           alert("Senha alterada com sucesso");
+        } else{
+          alert("Senha não alterada");
         }
       });
     },
@@ -183,7 +191,7 @@ export default {
 .esqueceu__login {
   padding: 12px;
   width: 100px;
-  background-color:  #1958ab75;
+  background-color: #1958ab75;
   border: none;
   border-radius: 10px;
   color: #ffffff;
@@ -192,6 +200,6 @@ export default {
 button:hover {
   color: white;
   font-weight: bold;
-  background-color:  #1958ab75;;
+  background-color: #1958ab75;
 }
 </style>

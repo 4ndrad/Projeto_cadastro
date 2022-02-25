@@ -54,7 +54,7 @@
   </div>
 </template>
 <script>
-import Botao from '../botao/Botao.vue';
+import Botao from '../botao/Botao.vue'
 
 export default {
   components: { 

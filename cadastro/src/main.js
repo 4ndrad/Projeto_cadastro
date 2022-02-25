@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueResource from 'vue-resource';
-import VueRouter from 'vue-router';
 import VeeValidate from 'vee-validate';
-import {routes} from './routes';
+import router from './routes';
+import provedor from './provedor'
 import msg from './pt_BR';
 
 Vue.use(VueResource);
-Vue.use(VueRouter);
+
 Vue.use(VeeValidate,{
   locale:'pt_BR',
   dictionary:{
@@ -19,13 +19,9 @@ Vue.use(VeeValidate,{
 
 Vue.http.options.root = 'http://localhost:3000';
 
-const router = new VueRouter({
-  routes,
-  mode: 'history'
-})
-
 new Vue({
   el: '#app',
   router,
+  store: provedor,
   render: h => h(App)
 })

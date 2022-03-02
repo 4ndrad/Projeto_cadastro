@@ -23,16 +23,16 @@ async function getByCpfCnpj(cpfCnpj) {
 
 // POST cadastro por cpf        
 async function createNew(cadastro) {
-    const res = await db.query(`insert into cadastro (cpfCnpj,senha,nome,sobreNome,razaoSocial,dtNascFund,dtCriacao) value(?,?,?,?,?,?,?);`, [cadastro.cpfCnpj, cadastro.senha, cadastro.nome, cadastro.sobreNome, cadastro.razaoSocial, cadastro.dtNascFund, cadastro.dtCriacao]);
+    const res = await db.query(`INSERT INTO cadastro (cpfCnpj, senha, nome, sobreNome, razaoSocial, dtNascFund, dtCriacao) VALUES (?, ?, ?, ?, ?, ?, NOW());`, [cadastro.cpfCnpj, cadastro.senha, cadastro.nome, cadastro.sobreNome, cadastro.razaoSocial, cadastro.dtNascFund]);
     if (res.affectedRows) {
-        const result = await db.query(`SELECT idCad, cpfCnpj, nome, sobreNome, razaoSocial, DtNascFund FROM cadastro WHERE cpfCnpj= ?;`, [cadastro.cpfCnpj]);      
+        const result = await db.query(`SELECT idCad, cpfCnpj, nome, sobreNome, razaoSocial, dtNascFund FROM cadastro WHERE cpfCnpj= ?;`, [cadastro.cpfCnpj]);
         return result;
     } else {
         return null;
-    } 
+    }
 }
 
-async function update(cadastro , idCad){
+async function update(cadastro, idCad) {
     const res = await db.query(`UPDATE cadastro SET nome=? , sobreNome=?, razaoSocial=?, dtNascFund=? WHERE idCad=?;`, [cadastro.nome, cadastro.sobreNome, cadastro.razaoSocial, cadastro.dtNascFund, idCad]);
     if (res.affectedRows) {
         const result = await db.query(`SELECT idCad, cpfCnpj, nome, sobreNome, razaoSocial, dtNascFund FROM cadastro WHERE idCad= ?;`, [idCad]);
@@ -43,15 +43,15 @@ async function update(cadastro , idCad){
 }
 
 async function deleteCad(idCad) {
-    const res = await db.query(`DELETE FROM cadastro WHERE idCad = ?;`,[idCad]);
+    const res = await db.query(`DELETE FROM cadastro WHERE idCad = ?;`, [idCad]);
     if (res.affectedRows) {
-        const result = await db.query(`SELECT * FROM cadastro WHERE idCad= ?;`,[idCad]);
+        const result = await db.query(`SELECT * FROM cadastro WHERE idCad= ?;`, [idCad]);
         console.log("deletado")
         return result;
     } else {
         return null;
     }
-} 
+}
 
 module.exports = {
     getAll, getById, getByCpfCnpj, createNew, update, deleteCad

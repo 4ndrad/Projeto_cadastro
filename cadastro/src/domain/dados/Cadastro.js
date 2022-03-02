@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 export default class Cadastro{
     constructor(nome='', sobreNome='', dtNascFund= '', senha='', cpfCnpj='', razaoSocial=''){
         this.nome = nome;
@@ -10,3 +11,17 @@ export default class Cadastro{
 }
 
 
+=======
+export default class Cadastro{
+    constructor(nome='', sobreNome='', dtNascFund= '', senha='', cpfCnpj='', razaoSocial=''){
+        this.nome = nome;
+        this.sobreNome = sobreNome;
+        this.dtNascFund = dtNascFund;
+        this.senha = senha;
+        this.cpfCnpj = cpfCnpj;
+        this.razaoSocial = razaoSocial;
+    }
+}
+
+
+>>>>>>> 8fc890dbbc8bd7abdf8d09ad3805b169d7117974

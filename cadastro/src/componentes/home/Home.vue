@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <template>
   <div class="envolve">
     <nav>
@@ -9,58 +8,103 @@
       </ul>
     </nav>
     <body>
-      <h1 class="titulo-home">Seja bem-vindo</h1>
-      <ul class="dados__usuario">
-        <li>
-          <ul > 
+      <h1 class="titulo-home">Seja bem-vindo {{ cadastros[0].nome }} ;)</h1>
+      <ul class="dados">
+        <div class="dados__usuario">
+          <li>
             <h1 class="titulo-dados">Dados Usuário</h1>
-            <li>CPF-CNPJ:</li>
-            <li>Nome:</li>
-            <li>Sobrenome:</li>
-            <li>Razão Social:</li>
-            <li>Data de criação:</li>
-          </ul>
-        </li>
+            <ul v-for="cadastro of cadastros" class="central-usuario">
+              <li>CPF-CNPJ: {{ cadastro.cpfCnpj }}</li>
+              <li>Nome: {{ cadastro.nome }}</li>
+              <li>Sobrenome: {{ cadastro.sobreNome }}</li>
+              <li>Razão Social: {{ cadastro.razaoSocial }}</li>
+              <li>Data de criação: {{ cadastro.dtNascFund }}</li>
+            </ul>
+          </li>
+        </div>
 
-        <br />
-
-        <li>
-          <ul>
+        <div class="dados__usuario">
+          <li>
             <h1 class="titulo-dados">Dados do Documento</h1>
-            <li>Tipo:</li>
-            <li>Número:</li>
-            <li>Dígito:</li>
-            <li>Data Expedição:</li>
-            <li>Validade:</li>
-            <li>Emissor:</li>
-          </ul>
-        </li>
+            <ul v-for="documento of documentos" >
+              <div class="central-documento">
+                <li>Tipo: {{ documento.tipo }}</li>
+                <li>Número: {{ documento.numero }}</li>
+                <li>Dígito: {{ documento.digito }}</li>
+                <li>Data Expedição: {{ documento.dtExp }}</li>
+                <li>Validade: {{ documento.dtValidade }}</li>
+                <li>Emissor: {{ documento.emissor }}</li>
+              </div>
 
-        <br />
+              <div class="botao__usuario">
+                <router-link
+                  :to="{
+                    name: 'usuarioAlterarDocumento',
+                    params: { id: documento.idCad },
+                  }"
+                >
+                  <meu-botao
+                    rotulo="Alterar "
+                    tipo="button"
+                    :confirmacao="true"
+                    estilo="perigo"
+                  />
+                </router-link>
+              </div>
+            </ul>
+          </li>
+        </div>
 
-        <li>
-          <ul>
+        <div class="dados__usuario">
+          <li>
             <h1 class="titulo-dados">Dados do Endereço</h1>
-            <li>CEP:</li>
-            <li>Logradouro:</li>
-            <li>Número:</li>
-            <li>Complemento:</li>
-            <li>Bairro:</li>
-            <li>Município:</li>
-            <li>UF:</li>
-            <li>Típo:</li>
-          </ul>
-        </li>
+            <ul v-for="endereco of enderecos">
+              <div class="central-endereco">
+                <li>CEP: {{ endereco.cep }}</li>
+                <li>Logradouro: {{ endereco.logradouro }}</li>
+                <li>Número: {{ endereco.numero }}</li>
+                <li>Complemento: {{ endereco.complemento }}</li>
+                <li>Bairro: {{ endereco.bairro }}</li>
+                <li>Município: {{ endereco.municipio }}</li>
+                <li>UF: {{ endereco.uf }}</li>
+                <li>Típo: {{ endereco.tipo }}</li>
+              </div>
+
+              <div class="botao__usuario">
+                <router-link
+                  :to="{
+                    name: 'usuarioAlterarEndereco',
+                    params: { id: endereco.idEnd },
+                  }"
+                >
+                  <meu-botao
+                    rotulo="Alterar "
+                    tipo="button"
+                    :confirmacao="true"
+                    estilo="perigo"
+                  />
+                </router-link>
+              </div>
+            </ul>
+          </li>
+        </div>
       </ul>
     </body>
   </div>
 </template>
 
 <script>
+import Botao from "../shared/botao/Botao.vue";
 export default {
+  components: {
+    "meu-botao": Botao,
+  },
   data() {
     return {
-      dados: [],
+      cadastros: [],
+      documentos: [],
+      enderecos: [],
+      token: this.$store.state.idCad,
     };
   },
   methods: {
@@ -69,11 +113,35 @@ export default {
       this.$router.push({ name: "login" });
     },
   },
+  created() {
+    this.$http
+      .get(`cadastro/${this.token}`)
+      .then((res) => res.json())
+      .then(
+        (cadastros) => {
+          this.cadastros = cadastros;
+
+          this.$http
+            .get(`documento/${this.token}`)
+            .then((res) => res.json())
+            .then((documentos) => {
+              this.documentos = documentos;
+            });
+
+          this.$http
+            .get(`endereco/${this.token}`)
+            .then((res) => res.json())
+            .then((enderecos) => {
+              this.enderecos = enderecos;
+            });
+        },
+        (err) => console.log(err)
+      );
+  },
 };
 </script>
 
 <style scoped>
-
 li {
   list-style-type: none;
 }
@@ -83,14 +151,30 @@ li {
   margin-top: 40px;
   margin-bottom: 40px;
   padding-top: 20px;
-  padding-bottom: 30px;
+  padding-bottom: 40px;
+  font-size: 18px;
   color: aliceblue;
-  width: 45%;
-  background-color: blue;
+  background-color: rgba(0, 38, 255, 0.329);
+  border-radius: 15px;
+  width: 40%;
+  border: solid #fff;
 }
 
-.titulo-dados{
+.central-usuario {
+  margin-left: 20%;
+}
+
+.central-documento{
+  margin-left: 10%;
+}
+
+.central-endereco{
+  margin-left: 13%;
+}
+
+.titulo-dados {
   text-align: center;
+  color: #e64a1a;
 }
 
 .envolve {
@@ -98,8 +182,8 @@ li {
 }
 
 .titulo-home {
-  color: red;
-  text-align: center;
+  color: #fff;
+  margin-left: 40%;
   margin-bottom: 10px;
 }
 
@@ -110,66 +194,13 @@ li {
   padding-right: 20px;
 }
 
-.logout {
-  font-size: 16px;
-
-  color: white;
-  background-color: #1958ab75;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-right: 15px;
-  padding-left: 15px;
-  text-decoration: none;
-  border: solid white;
-  border-radius: 10px;
-}
-
-.logout:hover {
-  font-weight: bold;
-  background-color: #e64a1a;
-}
-=======
-<template>
-  <div class="envolve">
-    <nav>
-      <ul class="barra">
-        <li class="item">
-          <button class="logout" @click.prevent="Logout">Sair</button>
-        </li>
-      </ul>
-    </nav>
-    <body>
-      <h1 class="titulo-home">Bem Vindo</h1>
-    </body>
-  </div>
-</template>
-
-<script>
-export default {
-  methods: {
-    Logout() {
-      this.$store.commit('DESLOGAR_USUARIO')
-      this.$router.push({ name: "login" });
-    },
-  },
-};
-</script>
-
-<style>
-.envolve {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.titulo-home {
-  color: red;
-  text-align: center;
-}
-
-.barra {
+.botao__usuario {
   display: flex;
-  justify-content: flex-end;
-  padding-top: 10px;
-  padding-right: 20px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 12px;
 }
 
 .logout {
@@ -190,5 +221,4 @@ export default {
   font-weight: bold;
   background-color: #e64a1a;
 }
->>>>>>> 8fc890dbbc8bd7abdf8d09ad3805b169d7117974
 </style>

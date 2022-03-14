@@ -3,7 +3,7 @@
     <form @submit.prevent="grava()" class="dados">
       <h1 class="titulo__dados">Cadastro</h1>
 
-      <div id="cadastro__usuario">
+      <div class="cadastro__usuario">
         <div class="erro" v-show="errors.has('nome')">
           {{ errors.first("nome") }}
         </div>
@@ -26,6 +26,7 @@
         <div class="erro" v-show="errors.has('sobrenome')">
           {{ errors.first("sobrenome") }}
         </div>
+
         <div class="campo__nome">
           <label for="sobrenome">Sobrenome</label>
           <input
@@ -40,107 +41,109 @@
             autocomplete="off"
           />
         </div>
+
+        <div class="erro" v-show="errors.has('dtNascFund')">
+          {{ errors.first("dtNascFund") }}
+        </div>
+
+        <div class="campo__dtNascFund">
+          <label for="dtNascFund">Data de Nascimento</label>
+          <input
+            type="date"
+            name="dtNascFund"
+            v-validate
+            data-vv-as="Data de Nascimento"
+            data-vv-rules="required"
+            id="dtNascFund"
+            class="data"
+            autocomplete="off"
+            v-model="cadastro.dtNascFund"
+            value="yyyy/mm/dd"
+          />
+        </div>
+
+        <div class="erro" v-show="errors.has('senha')">
+          {{ errors.first("senha") }}
+        </div>
+
+        <div class="campo__senha">
+          <label for="senha">Senha</label>
+          <input
+            type="password"
+            name="senha"
+            v-validate
+            data-vv-as="Senha"
+            data-vv-rules="required|min:7|max:15"
+            id="senha"
+            class="inputs"
+            autocomplete="off"
+            v-model="cadastro.senha"
+          />
+        </div>
+
+        <div class="erro" v-show="errors.has('cpfCnpj')">
+          {{ errors.first("cpfCnpj") }}
+        </div>
+
+        <div class="campo__cpfCnpj">
+          <label for="cpfCnpj">CPF-CNPJ</label>
+          <input
+            type="text"
+            name="cpfCnpj"
+            v-validate
+            data-vv-as="CPF-CNPJ"
+            data-vv-rules="required|min:11|max:14"
+            id="cpfCnpj"
+            class="inputs"
+            autocomplete="off"
+            v-model="cadastro.cpfCnpj"
+            placeholder="xxx.xxx.xxx-xx"
+          />
+        </div>
+
+        <div class="campo__razao">
+          <label for="razao">Razão Social</label>
+          <input
+            type="text"
+            name="razao"
+            id="razao"
+            class="inputs"
+            autocomplete="off"
+            v-model="cadastro.razaoSocial"
+          />
+        </div>
       </div>
-      <div class="erro" v-show="errors.has('dtNascFund')">
-        {{ errors.first("dtNascFund") }}
-      </div>
 
-      <div class="campo__dtNascFund">
-        <label for="dtNascFund">Data de Nascimento</label>
-        <input
-          type="date"
-          name="dtNascFund"
-          v-validate
-          data-vv-as="Data de Nascimento"
-          data-vv-rules="required"
-          id="dtNascFund"
-          class="data"
-          autocomplete="off"
-          v-model="cadastro.dtNascFund"
-          value="yyyy/mm/dd"
-        />
-      </div>
+      <fieldset class="field">
+        <legend>Qual o tipo do documento ?</legend>
 
-      <div class="erro" v-show="errors.has('senha')">
-        {{ errors.first("senha") }}
-      </div>
+        <label for="rg"
+          ><input
+            type="radio"
+            name="documento"
+            v-validate
+            v-model="documento.tipo"
+            value="rg"
+            id="1"
+            class="radio"
+          />RG</label
+        >
+        <label for="cnh"
+          ><input
+            type="radio"
+            name="documento"
+            v-validate
+            v-model="documento.tipo"
+            value="cnh"
+            id="2"
+            class="radio"
+          />CNH</label
+        >
+      </fieldset>
 
-      <div class="campo__senha">
-        <label for="senha">Senha</label>
-        <input
-          type="password"
-          name="senha"
-          v-validate
-          data-vv-as="Senha"
-          data-vv-rules="required|min:7|max:15"
-          id="senha"
-          class="inputs"
-          autocomplete="off"
-          v-model="cadastro.senha"
-        />
-      </div>
+      <br />
 
-      <div class="erro" v-show="errors.has('cpfCnpj')">
-        {{ errors.first("cpfCnpj") }}
-      </div>
-
-      <div class="campo__cpfCnpj">
-        <label for="cpfCnpj">CPF-CNPJ</label>
-        <input
-          type="text"
-          name="cpfCnpj"
-          v-validate
-          data-vv-as="CPF-CNPJ"
-          data-vv-rules="required|min:11|max:14"
-          id="cpfCnpj"
-          class="inputs"
-          autocomplete="off"
-          v-model="cadastro.cpfCnpj"
-          placeholder="xxx.xxx.xxx-xx"
-        />
-      </div>
-
-      <div class="campo__razao">
-        <label for="razao">Razão Social</label>
-        <input
-          type="text"
-          name="razao"
-          id="razao"
-          class="inputs"
-          autocomplete="off"
-          v-model="cadastro.razaoSocial"
-        />
-      </div>
-
-      <div id="cadastro__documento">
-        <fieldset class="field">
-          <legend>Qual o tipo do documento ?</legend>
-
-          <label for="rg"
-            ><input
-              type="radio"
-              name="documento"
-              v-validate
-              v-model="documento.tipo"
-              value="rg"
-              id="1"
-              class="radio"
-            />RG</label
-          >
-          <label for="cnh"
-            ><input
-              type="radio"
-              name="documento"
-              v-validate
-              v-model="documento.tipo"
-              value="cnh"
-              id="2"
-              class="radio"
-            />CNH</label
-          >
-        </fieldset>
-        <br />
-
+      <div class="cadastro__documento">
         <div class="erro" v-show="errors.has('numeroDoc')">
           {{ errors.first("numeroDoc") }}
         </div>
@@ -235,11 +238,36 @@
         />
       </div>
 
-      <div class="erro" v-show="errors.has('cep')">
-        {{ errors.first("cep") }}
-      </div>
+      <fieldset class="field">
+        <label for="radio-r"
+          ><input
+            type="radio"
+            v-model="endereco.tipo"
+            id="A"
+            class="radio"
+            name="myGroup"
+            value="r"
+          />Residencial</label
+        >
+        <label for="radio-c"
+          ><input
+            type="radio"
+            v-model="endereco.tipo"
+            id="B"
+            class="radio"
+            name="myGroup"
+            value="c"
+          />Comercial</label
+        >
+      </fieldset>
 
-      <div id="cadastro__endereco">
+      <br />
+
+      <div class="cadastro__endereco">
+        <div class="erro" v-show="errors.has('cep')">
+          {{ errors.first("cep") }}
+        </div>
+
         <label for="cep">CEP</label>
         <input
           type="text"
@@ -336,45 +364,22 @@
         <div class="erro" v-show="errors.has('uf')">
           {{ errors.first("uf") }}
         </div>
+
+        <label for="uf">UF</label>
+        <input
+          type="text"
+          name="uf"
+          v-validate
+          data-vv-as="UF"
+          data-vv-rules="required|min:2|max:2"
+          id="uf"
+          class="uf"
+          autocomplete="off"
+          v-model="endereco.uf"
+        />
       </div>
 
-      <label for="uf">UF</label>
-      <input
-        type="text"
-        name="uf"
-        v-validate
-        data-vv-as="UF"
-        data-vv-rules="required|min:2|max:2"
-        id="uf"
-        class="uf"
-        autocomplete="off"
-        v-model="endereco.uf"
-      />
-      <div class="campo__uf">
-        <fieldset class="field">
-          <label for="radio-r"
-            ><input
-              type="radio"
-              v-model="endereco.tipo"
-              id="A"
-              class="radio"
-              name="myGroup"
-              value="r"
-            />Residencial</label
-          >
-          <label for="radio-c"
-            ><input
-              type="radio"
-              v-model="endereco.tipo"
-              id="B"
-              class="radio"
-              name="myGroup"
-              value="c"
-            />Comercial</label
-          >
-        </fieldset>
-        <br />
-      </div>
+      <br />
       <div class="botoes">
         <input
           type="submit"
@@ -450,18 +455,20 @@ export default {
   padding: 0;
 }
 
-/*#cadastro__usuario{
+.cadastro__usuario {
+  margin-left: 10%;
+  margin-bottom: 15px;
 }
 
-#cadastro__documento{
-
+.cadastro__documento {
+  margin-left: 10%;
+  margin-bottom: 15px;
 }
 
-#cadastro__endereco{
-
-}*/
-
-.erro {
+.cadastro__endereco {
+  margin-left: 10%;
+}
+* .erro {
   font-weight: bold;
   margin-bottom: 8px;
   color: red;
@@ -478,7 +485,6 @@ export default {
   border: solid;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 18px;
-  text-align: center;
   background-color: #f8f8ff;
 }
 
@@ -524,12 +530,12 @@ export default {
 }
 
 .field {
-  text-align: center; 
+  text-align: center;
 }
 
 .radio {
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   margin-left: 20px;
 }
 

@@ -52,9 +52,6 @@ export const routes = [
         path: '/admin',
         name: 'admin',
         component: Admin,
-        meta: {
-            publica: true
-        }
         //privado
     },
 

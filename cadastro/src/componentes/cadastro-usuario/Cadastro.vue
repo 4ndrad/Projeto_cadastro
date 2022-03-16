@@ -4,11 +4,11 @@
       <h1 class="titulo__dados">Cadastro</h1>
 
       <div class="cadastro__usuario">
+        
         <div class="erro" v-show="errors.has('nome')">
           {{ errors.first("nome") }}
         </div>
 
-        <div class="campo__nome">
           <label for="nome">Nome</label>
           <input
             type="text"
@@ -21,7 +21,6 @@
             v-model="cadastro.nome"
             autocomplete="off"
           />
-        </div>
 
         <div class="erro" v-show="errors.has('sobrenome')">
           {{ errors.first("sobrenome") }}
@@ -238,31 +237,6 @@
         />
       </div>
 
-      <fieldset class="field">
-        <label for="radio-r"
-          ><input
-            type="radio"
-            v-model="endereco.tipo"
-            id="A"
-            class="radio"
-            name="myGroup"
-            value="r"
-          />Residencial</label
-        >
-        <label for="radio-c"
-          ><input
-            type="radio"
-            v-model="endereco.tipo"
-            id="B"
-            class="radio"
-            name="myGroup"
-            value="c"
-          />Comercial</label
-        >
-      </fieldset>
-
-      <br />
-
       <div class="cadastro__endereco">
         <div class="erro" v-show="errors.has('cep')">
           {{ errors.first("cep") }}
@@ -380,6 +354,31 @@
       </div>
 
       <br />
+
+            <fieldset class="field">
+        <label for="radio-r"
+          ><input
+            type="radio"
+            v-model="endereco.tipo"
+            id="A"
+            class="radio"
+            name="myGroup"
+            value="r"
+          />Residencial</label
+        >
+        <label for="radio-c"
+          ><input
+            type="radio"
+            v-model="endereco.tipo"
+            id="B"
+            class="radio"
+            name="myGroup"
+            value="c"
+          />Comercial</label
+        >
+      </fieldset>
+
+      <br />
       <div class="botoes">
         <input
           type="submit"
@@ -455,25 +454,6 @@ export default {
   padding: 0;
 }
 
-.cadastro__usuario {
-  margin-left: 10%;
-  margin-bottom: 15px;
-}
-
-.cadastro__documento {
-  margin-left: 10%;
-  margin-bottom: 15px;
-}
-
-.cadastro__endereco {
-  margin-left: 10%;
-}
-* .erro {
-  font-weight: bold;
-  margin-bottom: 8px;
-  color: red;
-}
-
 .dados {
   box-sizing: border-box;
   margin: auto;
@@ -495,6 +475,26 @@ export default {
   background-color: #e64a1a;
   color: white;
   border: solid black;
+}
+
+.cadastro__usuario {
+  margin-left: 10%;
+  margin-bottom: 15px;
+}
+
+.cadastro__documento {
+  margin-left: 10%;
+  margin-bottom: 15px;
+}
+
+.cadastro__endereco {
+  margin-left: 10%;
+}
+
+* .erro {
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: red;
 }
 
 .inputs {

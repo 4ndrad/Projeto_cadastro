@@ -1,8 +1,8 @@
 <template >
   <div>
     <form @submit.prevent="loga()" class="formulario">
-      <div class="div__titulo">
-        <h1 class="titulo">{{ titulo }}</h1>
+      <div class="titulo__login">
+        <h1 >{{ titulo }}</h1>
       </div>
       <p class="invalide" v-if="mensagemErro">{{ mensagemErro }}</p>
       <div>
@@ -45,6 +45,7 @@ export default {
       titulo: "LOGIN",
       usuario: {},
       mensagemErro: "",
+      adminCad: 373,
     };
   },
   methods: {
@@ -52,12 +53,16 @@ export default {
       this.$http
         .post("login", this.usuario)
         .then((res) => {
-          console.log(res);
           this.usuario.idCad = res.data[0].idCad;
-          this.$store.commit("DEFINIR_USUARIO_LOGADO", {
-            idCad: res.data[0].idCad,
-          });
-          this.$router.push({ name: "home" });
+          if (this.usuario.idCad === this.adminCad) {
+            this.$router.push({ name: "admin" });
+          } else {
+            console.log(res);
+            this.$store.commit("DEFINIR_USUARIO_LOGADO", {
+              idCad: res.data[0].idCad,
+            });
+            this.$router.push({ name: "home" });
+          }
         })
         .catch((err) => {
           if ((err, new Error())) {
@@ -81,7 +86,7 @@ export default {
   position: absolute;
   border: solid white;
 }
-.titulo {
+.titulo__login {
   text-align: center;
   color: #e64a1a;
 }

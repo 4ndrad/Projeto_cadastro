@@ -55,6 +55,9 @@ export default {
         .then((res) => {
           this.usuario.idCad = res.data[0].idCad;
           if (this.usuario.idCad === this.adminCad) {
+             this.$store.commit("DEFINIR_USUARIO_LOGADO", {
+              idCad: res.data[0].idCad,
+            });
             this.$router.push({ name: "admin" });
           } else {
             console.log(res);

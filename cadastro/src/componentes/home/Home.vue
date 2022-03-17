@@ -50,6 +50,20 @@
                     estilo="perigo"
                   />
                 </router-link>
+
+                         <router-link
+                  :to="{
+                    name: 'inserirDocumento',
+                    params: { id: documento.idCad },
+                  }"
+                >
+                  <meu-botao
+                    rotulo="Inserir "
+                    tipo="button"
+                    :confirmacao="true"
+                    estilo="insert"
+                  />
+                </router-link>
               </div>
             </ul>
           </li>
@@ -84,6 +98,21 @@
                     estilo="perigo"
                   />
                 </router-link>
+
+                  <router-link
+                  :to="{
+                    name: 'inserirEndereco',
+                    params: { id: endereco.idEnd },
+                  }"
+                >
+                  <meu-botao
+                    rotulo="Inserir "
+                    tipo="button"
+                    :confirmacao="true"
+                    estilo="insert"
+                  />
+                </router-link>
+                
               </div>
             </ul>
           </li>

@@ -10,6 +10,9 @@ import AlterarDocumento from './componentes/shared/alterar-documento/AlterarDocu
 import AlterarEndereco from './componentes/shared/alterar-endereco/AlterarEndereco.vue';
 import UsuarioAlterarDocumento from './componentes/shared/usuario-alterar-documento/UsuarioAlterarDocumento.vue';
 import UsuarioAlterarEndereco from './componentes/shared/usuario-alterar-endereco/UsuarioAlterarEndereco.vue';
+import InserirDocumento from './componentes/shared/inserir-documento/InserirDocumento.vue';
+import InserirEndereco from './componentes/shared/inserir-endereco/InserirEndereco.vue';
+
 
 Vue.use(VueRouter);
 
@@ -89,7 +92,24 @@ export const routes = [
             publica: true
         }
     },
+    {
+        path:'/inserirDocumento/:id',
+        name:'inserirDocumento',
+        component: InserirDocumento,
+        meta: {
+            publica: true
+        }
+    },
 
+    {
+        path:'/inserirEndereco/:id',
+        name:'inserirEndereco',
+        component: InserirEndereco,
+        meta: {
+            publica: true
+        }
+    },
+  
     {
         path: '*',
         component: Login

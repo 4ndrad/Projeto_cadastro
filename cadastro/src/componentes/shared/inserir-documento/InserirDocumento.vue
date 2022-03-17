@@ -103,7 +103,7 @@
 
       <div class="botao__alteraDoc">
         <meu-botao
-          rotulo="Alterar"
+          rotulo="Inserir"
           tipo="button"
           @botaoAtivado="grava(documento)"
           :confirmacao="true"
@@ -135,10 +135,10 @@ export default {
   methods: {
     grava() {
       this.$http
-        .put(`documento/${this.id}`, this.documento)
+        .post(`documento/${this.id}`, this.documento)
         .then(() => {
           this.documento.idCad = this.id;
-          alert("documento alterado com sucesso");
+          alert("documento inserido com sucesso");
           this.$router.push({ name: "home" });
         })
         .catch((err) => {
@@ -147,6 +147,7 @@ export default {
           }
         });
     },
+    
   },
 };
 </script>
@@ -167,16 +168,14 @@ export default {
   position: absolute;
   font-family: Arial, Helvetica, sans-serif;
   color: white;
-  background-color: #e64a1aa1;
+  background-color: #1958ab96;
 }
-
 .titulo__alteraDoc {
   margin-bottom: 40px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 40px;
   text-align: center;
 }
-
 .inputs___alteraDoc {
   margin-bottom: 15px;
   width: 150px;

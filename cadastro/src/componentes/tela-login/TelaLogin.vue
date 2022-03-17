@@ -2,7 +2,7 @@
   <div>
     <form @submit.prevent="loga()" class="formulario">
       <div class="titulo__login">
-        <h1 >{{ titulo }}</h1>
+        <h1>{{ titulo }}</h1>
       </div>
       <p class="invalide" v-if="mensagemErro">{{ mensagemErro }}</p>
       <div>
@@ -21,7 +21,7 @@
         />
       </div>
       <br />
-      <input type="submit" value="Continuar" class="botao" />
+      <input type="submit" value="Continuar" class="login" />
       <div class="div__botoes">
         <router-link :to="{ name: 'esqueceu' }" tag="a" class="esqueceu__acesso"
           >Esqueceu a senha ?</router-link
@@ -55,7 +55,7 @@ export default {
         .then((res) => {
           this.usuario.idCad = res.data[0].idCad;
           if (this.usuario.idCad === this.adminCad) {
-             this.$store.commit("DEFINIR_USUARIO_LOGADO", {
+            this.$store.commit("DEFINIR_USUARIO_LOGADO", {
               idCad: res.data[0].idCad,
             });
             this.$router.push({ name: "admin" });
@@ -116,7 +116,7 @@ export default {
   font-size: 20px;
 }
 
-.botao {
+.login{
   font-family: Arial, Helvetica, sans-serif;
   width: 100%;
   background-color: #e64a1a;
@@ -126,7 +126,7 @@ export default {
   color: white;
 }
 
-.botao:hover {
+.login:hover {
   font-weight: bold;
   background-color: #e64a1a;
   color: #ffffff;

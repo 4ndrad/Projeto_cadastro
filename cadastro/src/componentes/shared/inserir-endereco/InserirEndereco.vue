@@ -1,8 +1,8 @@
 <template>
   <div>
     <form @submit.prevent="grava()" class="alteraEnd">
-      <h1 class="titulo__alteraEnd">Alterar Endereço</h1>
-        <div class="invalide">
+      <h1 class="titulo__alteraEnd">Inserir Endereço</h1>
+      <div class="invalide">
         <p  v-if="mensagemErro">{{ mensagemErro }}</p>
       </div>
 
@@ -116,7 +116,7 @@
 
       <div class="botao__alteraDoc">
         <meu-botao
-          rotulo="Alterar"
+          rotulo="Inserir"
           tipo="button"
           @botaoAtivado="grava()"
           :confirmacao="true"
@@ -147,10 +147,10 @@ export default {
   methods: {
     grava() {
       this.$http
-        .put(`endereco/${this.id}`, this.endereco)
+        .post(`endereco/${this.id}`, this.endereco)
         .then(() => {
           this.endereco.idEnd = this.id;
-          alert("endereço alterado com sucesso");
+          alert("endereço inserido com sucesso");
           this.$router.push({ name: "home" });
         })
         .catch((err) => {
@@ -179,7 +179,7 @@ export default {
   position: absolute;
   font-family: Arial, Helvetica, sans-serif;
   color: #ffffff;
-  background-color: #e64a1aa1;
+  background-color: #1958ab96;
 }
 .titulo__alteraEnd {
   margin-bottom: 40px;

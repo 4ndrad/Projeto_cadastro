@@ -4,23 +4,22 @@
       <h1 class="titulo__dados">Cadastro</h1>
 
       <div class="cadastro__usuario">
-        
         <div class="erro" v-show="errors.has('nome')">
           {{ errors.first("nome") }}
         </div>
 
-          <label for="nome">Nome</label>
-          <input
-            type="text"
-            name="nome"
-            v-validate
-            data-vv-as="Nome"
-            data-vv-rules="required|min:3|max:15"
-            id="nome"
-            class="inputs"
-            v-model="cadastro.nome"
-            autocomplete="off"
-          />
+        <label for="nome">Nome</label>
+        <input
+          type="text"
+          name="nome"
+          v-validate
+          data-vv-as="Nome"
+          data-vv-rules="required|min:3|max:15"
+          id="nome"
+          class="inputs"
+          v-model="cadastro.nome"
+          autocomplete="off"
+        />
 
         <div class="erro" v-show="errors.has('sobrenome')">
           {{ errors.first("sobrenome") }}
@@ -237,6 +236,32 @@
         />
       </div>
 
+
+      <fieldset class="field">
+        <label for="radio-r"
+          ><input
+            type="radio"
+            v-model="endereco.tipo"
+            id="A"
+            class="radio"
+            name="myGroup"
+            value="r"
+          />Residencial</label
+        >
+        <label for="radio-c"
+          ><input
+            type="radio"
+            v-model="endereco.tipo"
+            id="B"
+            class="radio"
+            name="myGroup"
+            value="c"
+          />Comercial</label
+        >
+      </fieldset>
+
+      <br>
+
       <div class="cadastro__endereco">
         <div class="erro" v-show="errors.has('cep')">
           {{ errors.first("cep") }}
@@ -353,30 +378,7 @@
         />
       </div>
 
-      <br />
-
-            <fieldset class="field">
-        <label for="radio-r"
-          ><input
-            type="radio"
-            v-model="endereco.tipo"
-            id="A"
-            class="radio"
-            name="myGroup"
-            value="r"
-          />Residencial</label
-        >
-        <label for="radio-c"
-          ><input
-            type="radio"
-            v-model="endereco.tipo"
-            id="B"
-            class="radio"
-            name="myGroup"
-            value="c"
-          />Comercial</label
-        >
-      </fieldset>
+      
 
       <br />
       <div class="botoes">

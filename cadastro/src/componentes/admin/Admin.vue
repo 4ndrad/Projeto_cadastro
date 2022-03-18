@@ -57,11 +57,11 @@ export default {
   background-color: #1958ab75;
   padding-top: 10px;
   padding-bottom: 10px;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 10px;
+  padding-left: 10px;
   text-decoration: none;
-  border: solid white;
-  border-radius: 10px;
+  border: solid 1px white;
+  border-radius: 5px;
 }
 
 .logout:hover {

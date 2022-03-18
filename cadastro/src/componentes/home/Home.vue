@@ -18,7 +18,6 @@
               <li>Nome: {{ cadastro.nome }}</li>
               <li>Sobrenome: {{ cadastro.sobreNome }}</li>
               <li>Razão Social: {{ cadastro.razaoSocial }}</li>
-              <li>Data de criação: {{ cadastro.dtNascFund }}</li>
             </ul>
           </li>
         </div>
@@ -203,7 +202,7 @@ li {
 
 .titulo-dados {
   text-align: center;
-  color: #e64a1a;
+  color: #f8f8ff;
 }
 
 .envolve {
@@ -211,7 +210,7 @@ li {
 }
 
 .titulo-home {
-  color: #fff;
+  color: #f8f8ff;
   margin-left: 40%;
   margin-bottom: 10px;
 }
@@ -234,16 +233,15 @@ li {
 
 .logout {
   font-size: 16px;
-
   color: white;
   background-color: #1958ab75;
   padding-top: 10px;
   padding-bottom: 10px;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 10px;
+  padding-left: 10px;
   text-decoration: none;
-  border: solid white;
-  border-radius: 10px;
+  border: solid 1px white;
+  border-radius: 5px;
 }
 
 .logout:hover {

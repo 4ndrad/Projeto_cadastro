@@ -6,7 +6,8 @@
         <p  v-if="mensagemErro">{{ mensagemErro }}</p>
       </div>
 
-      <div id="cadastro__endereco">
+      <div id="cadastro__endereco" class="cadastro__endereco">
+        <div class="container__inputs">
         <label for="cep">CEP</label>
         <input
           type="text"
@@ -20,7 +21,9 @@
           minlength="8"
           maxlength="8"
         />
-        <br />
+        </div>
+        
+        <div class="container__inputs">
         <label for="logradouro">Logradouro</label>
         <input
           type="text"
@@ -29,7 +32,11 @@
           autocomplete="off"
           v-model="endereco.logradouro"
         />
-        <label for="numero">Número</label>
+        </div>
+ 
+        
+        <div class="container__inputs">
+          <label for="numero">Número</label>
         <input
           type="number"
           name="numero"
@@ -42,8 +49,11 @@
           maxlength="999"
           required
         />
-        <br />
-        <label for="complemento">Completo</label>
+        </div>
+        
+
+        <div class="container__inputs">
+        <label for="complemento">Complemento</label>
         <input
           type="text"
           id="complemento"
@@ -51,7 +61,9 @@
           autocomplete="off"
           v-model="endereco.complemento"
         />
-        <br />
+        </div>
+
+        <div class="container__inputs">
         <label for="bairro">Bairro</label>
         <input
           type="text"
@@ -63,7 +75,9 @@
           v-model="endereco.bairro"
           required
         />
-        <br />
+        </div>
+        
+        <div class="container__inputs">
         <label for="municipio">Município</label>
         <input
           type="text"
@@ -75,7 +89,9 @@
           v-model="endereco.municipio"
           required
         />
+        </div>
 
+        <div class="container__inputs">
         <label for="uf">UF</label>
         <input
           type="text"
@@ -88,7 +104,8 @@
           minlength="2"
           maxlength="2"
         />
-        <br />
+        </div>
+        
         <fieldset class="field">
           <label for="radio-r"
             ><input
@@ -111,7 +128,7 @@
             />Comercial</label
           >
         </fieldset>
-        <br />
+        
       </div>
 
       <div class="botao__alteraDoc">
@@ -179,7 +196,7 @@ export default {
   position: absolute;
   font-family: Arial, Helvetica, sans-serif;
   color: #ffffff;
-  background-color: #e64a1aa1;
+  background-color: #d85128f6;;
 }
 .titulo__alteraEnd {
   margin-bottom: 40px;
@@ -188,19 +205,41 @@ export default {
   text-align: center;
 }
 .inputs__alteraEnd {
-  margin-bottom: 15px;
   width: 150px;
   text-align: center;
+    border: none;
+    font-size: 11pt;
+    height: 2.4vh;
+  border-radius: 30px;
 }
-.digito__alteraEnd {
-  width: 30px;
+.cadastro__endereco{
+  display: flex;
+  flex-direction: column;
 }
+
+.container__inputs{
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+
+}
+
 .numero__alteraEnd {
   width: 40px;
+  font-size: 11pt;
+  text-align: center;
+  height: 2.4vh;
+  border: none;
+  border-radius: 10px;
 }
 .uf__alteraEnd {
   width: 40px;
-  margin-bottom: 10px;
+  font-size: 11pt;
+  text-align: center;
+  height: 2.4vh;
+  border: none;
+  border-radius: 10px;
+
 }
 .field {
   text-align: center;

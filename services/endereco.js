@@ -27,6 +27,17 @@ async function createNew(endereco) {
     }
 }
 
+async function createNewById(endereco, idCad) {
+    const res = await db.query(`INSERT INTO endereco (idCad,cep, logradouro, numero, complemento, bairro, municipio ,uf , tipo) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?);`, [idCad, endereco.cep, endereco.logradouro, endereco.numero, endereco.complemento, endereco.bairro, endereco.municipio, endereco.uf, endereco.tipo]);
+
+    if (res.affectedRows) {
+        const result = await db.query(`SELECT idEnd, idCad, cep, logradouro, numero, complemento, bairro, municipio ,uf , tipo FROM endereco WHERE idCad = ?;`, [idCad]);
+        return result;
+    } else {
+        return null;
+    }
+}
+
 async function update(endereco, idEnd) {
     const res = await db.query(`UPDATE endereco SET cep=? , logradouro=?, numero=?, complemento=?, bairro=?, municipio =?,uf=? , tipo=? WHERE idEnd=?;`, [endereco.cep, endereco.logradouro, endereco.numero, endereco.complemento, endereco.bairro, endereco.municipio, endereco.uf, endereco.tipo, idEnd]);
 
@@ -43,7 +54,18 @@ async function deleteEnd(idEnd) {
     const res = await db.query(`DELETE FROM endereco WHERE idEnd = ?;`, [idEnd]);
 
     if (res.affectedRows) {
-        const result = await db.query(`SELECT idEnd, idCad, cep, logradouro, numero, complemento, bairro, municipio ,uf , tipo FROM endereco WHERE idCad= ?;`, [idEnd]);
+        const result = await db.query(`SELECT idEnd, idCad, cep, logradouro, numero, complemento, bairro, municipio ,uf , tipo FROM endereco WHERE idEnd = ?;`, [idEnd]);
+        return result;
+    } else {
+        return null;
+    }
+}
+
+async function deleteEndCad(idCad) {
+    const res = await db.query(`DELETE FROM endereco WHERE idCad = ?;`, [idCad]);
+
+    if (res.affectedRows) {
+        const result = await db.query(`SELECT idEnd, idCad, cep, logradouro, numero, complemento, bairro, municipio ,uf , tipo FROM endereco WHERE idCad = ?;`, [idCad]);
         return result;
     } else {
         return null;
@@ -51,6 +73,7 @@ async function deleteEnd(idEnd) {
 }
 
 
+
 module.exports = {
-    getAll, getById, createNew, update, deleteEnd
+    getAll, getById, createNew,createNewById ,update, deleteEnd, deleteEndCad
 }

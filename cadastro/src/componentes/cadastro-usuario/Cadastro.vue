@@ -8,44 +8,56 @@
           {{ errors.first("nome") }}
         </div>
 
-        <label for="nome">Nome</label>
-        <input
-          type="text"
-          name="nome"
-          v-validate
-          data-vv-as="Nome"
-          data-vv-rules="required|min:3|max:15"
-          id="nome"
-          class="inputs"
-          v-model="cadastro.nome"
-          autocomplete="off"
-        />
+        <div class="container__campo"> <!--passar para os outros cards-->
+          <label for="nome">
+            Nome
+          </label>
+          <div class="container__inputs"> 
+            <input
+              type="text"
+              name="nome"
+              v-validate
+              data-vv-as="Nome"
+              data-vv-rules="required|min:3|max:15"
+              maxlength="15"
+              id="nome"
+              class="inputs"
+              v-model="cadastro.nome"
+              autocomplete="off"
+            />
+            </div>
+          </div>
+
 
         <div class="erro" v-show="errors.has('sobrenome')">
           {{ errors.first("sobrenome") }}
         </div>
 
-        <div class="campo__nome">
+        <div class="container__campo">
           <label for="sobrenome">Sobrenome</label>
+          <div class="container__inputs">
           <input
             type="text"
             name="sobrenome"
             v-validate
             data-vv-as="Sobrenome"
             data-vv-rules="required|min:3|max:15"
+             maxlength="15"
             id="sobrenome"
             class="inputs"
             v-model="cadastro.sobreNome"
             autocomplete="off"
           />
+          </div>
         </div>
 
         <div class="erro" v-show="errors.has('dtNascFund')">
           {{ errors.first("dtNascFund") }}
         </div>
 
-        <div class="campo__dtNascFund">
+        <div class="container__campo">
           <label for="dtNascFund">Data de Nascimento</label>
+            <div class="container__inputs">
           <input
             type="date"
             name="dtNascFund"
@@ -59,13 +71,15 @@
             value="yyyy/mm/dd"
           />
         </div>
+        </div>
 
         <div class="erro" v-show="errors.has('senha')">
           {{ errors.first("senha") }}
         </div>
 
-        <div class="campo__senha">
+        <div class="container__campo">
           <label for="senha">Senha</label>
+          <div class="container__inputs">
           <input
             type="password"
             name="senha"
@@ -74,17 +88,20 @@
             data-vv-rules="required|min:7|max:15"
             id="senha"
             class="inputs"
+             maxlength="15"
             autocomplete="off"
             v-model="cadastro.senha"
           />
+          </div>
         </div>
 
         <div class="erro" v-show="errors.has('cpfCnpj')">
           {{ errors.first("cpfCnpj") }}
         </div>
 
-        <div class="campo__cpfCnpj">
+        <div class="container__campo">
           <label for="cpfCnpj">CPF-CNPJ</label>
+          <div class="container__inputs">
           <input
             type="text"
             name="cpfCnpj"
@@ -92,15 +109,18 @@
             data-vv-as="CPF-CNPJ"
             data-vv-rules="required|min:11|max:14"
             id="cpfCnpj"
+             maxlength="14"
             class="inputs"
             autocomplete="off"
             v-model="cadastro.cpfCnpj"
             placeholder="xxx.xxx.xxx-xx"
           />
+          </div>
         </div>
 
-        <div class="campo__razao">
+        <div class="container__campo">
           <label for="razao">Razão Social</label>
+          <div class="container__inputs">
           <input
             type="text"
             name="razao"
@@ -109,14 +129,15 @@
             autocomplete="off"
             v-model="cadastro.razaoSocial"
           />
+          </div>
         </div>
       </div>
 
       <fieldset class="field">
         <legend>Qual o tipo do documento ?</legend>
 
-        <label for="rg"
-          ><input
+        <label for="rg"</label>
+          <input
             type="radio"
             name="documento"
             v-validate
@@ -124,10 +145,11 @@
             value="rg"
             id="1"
             class="radio"
-          />RG</label
-        >
-        <label for="cnh"
-          ><input
+          />RG
+          
+        
+        <label for="cnh"</label>
+          <input
             type="radio"
             name="documento"
             v-validate
@@ -135,8 +157,8 @@
             value="cnh"
             id="2"
             class="radio"
-          />CNH</label
-        >
+          />CNH
+          
       </fieldset>
 
       <br />
@@ -146,45 +168,55 @@
           {{ errors.first("numeroDoc") }}
         </div>
 
-        <div class="documento-campo__numero">
+        <div class="container__campo">
           <label for="numero">Número do Documento</label>
-          <input
-            type="text"
-            name="numeroDoc"
-            v-validate
-            data-vv-as="Número do Documento"
-            data-vv-rules="required|min:7|max:9"
-            id="numero"
-            class="inputs"
-            autocomplete="off"
-            v-model="documento.numero"
-          />
+            <div class="container__inputs">
+              <input
+                type="text"
+                name="numeroDoc"
+                v-validate
+                data-vv-as="Número do Documento"
+                data-vv-rules="required|min:7|max:9"
+                id="numero"
+                maxlength="9"
+                class="inputs"
+                autocomplete="off"
+                v-model="documento.numero"
+              />
+            </div>
         </div>
 
         <div class="erro" v-show="errors.has('digitoDoc')">
           {{ errors.first("digitoDoc") }}
         </div>
 
-        <div class="documento-campo__digito">
+        <div class="container__campo">
           <label for="digito">Dígito</label>
-          <input
-            type="number"
-            name="digitoDoc"
-            v-validate
-            data-vv-as="Número do Documento"
-            data-vv-rules="required|min:1|max:9"
-            id="digito"
-            class="digito"
-            autocomplete="off"
-            v-model="documento.digito"
-          />
+            <div class="container__inputs">
+              <input
+                type="number"
+                name="digitoDoc"
+                v-validate
+                data-vv-as="Número do Documento"
+                data-vv-rules="required|min:0|max:2"
+                id="digito"
+              maxlength="2"
+                class="digito"
+                autocomplete="off"
+                v-model="documento.digito"
+              />
+            </div>
         </div>
 
         <div class="erro" v-show="errors.has('dtExp')">
           {{ errors.first("dtExp") }}
         </div>
 
+        
+        <div class="container__campo">
         <label for="data">Data de Expedição</label>
+        
+        <div class="container__inputs">
         <input
           type="date"
           name="dtExp"
@@ -197,13 +229,17 @@
           v-model="documento.dtExp"
           value="yyyy/mm/dd"
         />
+        </div>
+        </div>
 
         <div class="erro" v-show="errors.has('dtValidade')">
           {{ errors.first("dtValidade") }}
         </div>
 
-        <div class="campo__validade">
+        
+        <div class="container__campo">
           <label for="validade"> Data de Validade</label>
+            <div class="container__inputs">
           <input
             type="date"
             name="dtValidade"
@@ -216,13 +252,16 @@
             v-model="documento.dtValidade"
             value="yyyy/mm/dd"
           />
+          </div>
         </div>
 
         <div class="erro" v-show="errors.has('emissor')">
           {{ errors.first("emissor") }}
         </div>
 
+        <div class="container__campo">
         <label for="emissor">Emissor</label>
+        <div class="container__inputs">
         <input
           type="text"
           name="emissor"
@@ -234,10 +273,13 @@
           autocomplete="off"
           v-model="documento.emissor"
         />
+        </div>
+        </div>
       </div>
 
 
       <fieldset class="field">
+        <legend>Qual tipo do endereco? </legend>
         <label for="radio-r"
           ><input
             type="radio"
@@ -246,8 +288,9 @@
             class="radio"
             name="myGroup"
             value="r"
-          />Residencial</label
-        >
+          />Residencial
+          </label>
+
         <label for="radio-c"
           ><input
             type="radio"
@@ -256,8 +299,8 @@
             class="radio"
             name="myGroup"
             value="c"
-          />Comercial</label
-        >
+          />Comercial
+          </label>
       </fieldset>
 
       <br>
@@ -267,7 +310,9 @@
           {{ errors.first("cep") }}
         </div>
 
+        <div class="container__campo">
         <label for="cep">CEP</label>
+        <div class="container__inputs">
         <input
           type="text"
           name="cep"
@@ -276,13 +321,18 @@
           data-vv-rules="required|min:8|max:8"
           id="cep"
           class="inputs"
+          maxlength="8"
           autocomplete="off"
           v-model="endereco.cep"
           placeholder="00000-000"
         />
+        </div>
+        </div>
+ 
 
-        <div class="campo__logradouro">
+        <div class="container__campo">
           <label for="logradouro">Logradouro</label>
+          <div class="container__inputs">
           <input
             type="text"
             id="logradouro"
@@ -290,14 +340,17 @@
             autocomplete="off"
             v-model="endereco.logradouro"
           />
+          </div>
         </div>
 
         <div class="erro" v-show="errors.has('numero')">
           {{ errors.first("numero") }}
         </div>
 
-        <div class="campo__numero">
+
+        <div class="container__campo">
           <label for="numero">Número</label>
+          <div class="container__inputs">
           <input
             type="number"
             name="numero"
@@ -305,14 +358,18 @@
             data-vv-as="Número"
             data-vv-rules="required"
             id="numero"
+            maxlength="3"
             class="numero"
             autocomplete="off"
             v-model="endereco.numero"
           />
+          </div>
         </div>
 
-        <div class="campo__complemento">
+ 
+        <div class="container__campo">
           <label for="complemento">Completo</label>
+          <div class="container__inputs">
           <input
             type="text"
             id="complemento"
@@ -320,14 +377,17 @@
             autocomplete="off"
             v-model="endereco.complemento"
           />
+          </div>
         </div>
 
         <div class="erro" v-show="errors.has('bairro')">
           {{ errors.first("bairro") }}
         </div>
 
-        <div class="campo__bairro">
+
+        <div class="container__campo">
           <label for="bairro">Bairro</label>
+          <div class="container__inputs">
           <input
             type="text"
             name="bairro"
@@ -339,14 +399,17 @@
             autocomplete="off"
             v-model="endereco.bairro"
           />
+          </div>
         </div>
 
         <div class="erro" v-show="errors.has('municipio')">
           {{ errors.first("municipio") }}
         </div>
 
-        <div class="campo__municipio">
+
+        <div class="container__campo">
           <label for="municipio">Município</label>
+          <div class="container__inputs">
           <input
             type="text"
             name="municipio"
@@ -358,13 +421,17 @@
             autocomplete="off"
             v-model="endereco.municipio"
           />
+          </div>
         </div>
 
         <div class="erro" v-show="errors.has('uf')">
           {{ errors.first("uf") }}
         </div>
 
+        
+        <div class="container__campo">
         <label for="uf">UF</label>
+        <div class="container__inputs">
         <input
           type="text"
           name="uf"
@@ -373,9 +440,12 @@
           data-vv-rules="required|min:2|max:2"
           id="uf"
           class="uf"
+          maxlength="2"
           autocomplete="off"
           v-model="endereco.uf"
         />
+        </div>
+        </div>
       </div>
 
       
@@ -461,8 +531,8 @@ export default {
   margin: auto;
   margin-top: 30px;
   margin-bottom: 30px;
-  width: 40%;
-  padding: 40px;
+  width: 38%;
+  padding: 1em 3.5em;
   border-radius: 20px;
   border: solid;
   font-family: Arial, Helvetica, sans-serif;
@@ -471,26 +541,28 @@ export default {
 }
 
 .titulo__dados {
-  margin-bottom: 40px;
+  margin: 0.5em;
   font-size: 40px;
   text-align: center;
   background-color: #e64a1a;
   color: white;
-  border: solid black;
+  border-radius: 50px;
 }
 
 .cadastro__usuario {
-  margin-left: 10%;
-  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column; 
+  
 }
 
 .cadastro__documento {
-  margin-left: 10%;
-  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
 .cadastro__endereco {
-  margin-left: 10%;
+  display: flex;
+  flex-direction: column;
 }
 
 * .erro {
@@ -498,37 +570,54 @@ export default {
   margin-bottom: 8px;
   color: red;
 }
+ 
+.container__campo{
+  margin: 0.9em 0;
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+.container__inputs{
+  margin: 0 5px;
+  width: 55%;
+  display: flex;
+  justify-content: center;
+}
+
+.field{
+  display: flex;
+  justify-content: center;
+}
+
+.data{
+    font-size: 15px;
+    height: 100%;
+    width: 70%;
+    text-align: center;
+}
 
 .inputs {
-  margin-bottom: 15px;
   font-size: 15px;
-  width: 200px;
+  width: 100%;
+  height: 100%;
   text-align: center;
 }
 
-.data {
-  margin-bottom: 15px;
-  font-size: 15px;
-  width: 150px;
-  text-align: center;
-}
 
 .digito {
   font-size: 15px;
-  width: 30px;
-  margin-bottom: 10px;
+
 }
 
 .numero {
   font-size: 15px;
-  width: 40px;
-  margin-bottom: 10px;
+
 }
 
 .uf {
   font-size: 15px;
-  width: 40px;
-  margin-bottom: 10px;
+
 }
 
 .field {

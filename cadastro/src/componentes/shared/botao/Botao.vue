@@ -42,6 +42,7 @@ export default {
       if (this.estilo == "perigo") return " botao-perigo";
       if (this.estilo == "alterar") return " botao-alterar";
       if (this.estilo == "insert") return " botao-insert";
+      if (this.estilo == "alterarAdmin") return " botao-alterarAdmin";
     },
   },
 };
@@ -53,6 +54,8 @@ export default {
   border-radius: 3px;
   margin: 10px;
   font-size: 1.2em;
+  outline: none;
+  text-decoration: none;
 }
 
 .botao-perigo {
@@ -79,8 +82,15 @@ export default {
 
 .botao-insert {
   width: auto;
-  background-color: #1958ab;
-  color: white;
+  background-color: #ffffff;
+  color: rgb(36, 43, 85);
+  border: none;
+}
+
+.botao-alterarAdmin{
+   width: auto;
+  background: rgb(243, 233, 233);
+  color: rgb(0, 0, 0);
   border: none;
 }
 

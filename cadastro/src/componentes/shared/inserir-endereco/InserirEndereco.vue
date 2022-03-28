@@ -6,7 +6,8 @@
         <p  v-if="mensagemErro">{{ mensagemErro }}</p>
       </div>
 
-      <div id="cadastro__endereco">
+      <div id="cadastro__endereco" class="cadastro__endereco">
+        <div class="container__campos">
         <label for="cep">CEP</label>
         <input
           type="text"
@@ -20,7 +21,9 @@
           minlength="8"
           maxlength="8"
         />
-        <br />
+        </div>
+        
+        <div class="container__campos">
         <label for="logradouro">Logradouro</label>
         <input
           type="text"
@@ -29,6 +32,9 @@
           autocomplete="off"
           v-model="endereco.logradouro"
         />
+        </div>
+
+        <div class="container__campos">
         <label for="numero">Número</label>
         <input
           type="number"
@@ -42,7 +48,9 @@
           maxlength="999"
           required
         />
-        <br />
+        </div>
+        
+        <div class="container__campos">
         <label for="complemento">Completo</label>
         <input
           type="text"
@@ -51,7 +59,9 @@
           autocomplete="off"
           v-model="endereco.complemento"
         />
-        <br />
+        </div>
+        
+        <div class="container__campos">
         <label for="bairro">Bairro</label>
         <input
           type="text"
@@ -63,7 +73,10 @@
           v-model="endereco.bairro"
           required
         />
-        <br />
+        </div>
+
+        
+        <div class="container__campos">
         <label for="municipio">Município</label>
         <input
           type="text"
@@ -88,7 +101,8 @@
           minlength="2"
           maxlength="2"
         />
-        <br />
+        </div>
+        
         <fieldset class="field">
           <label for="radio-r"
             ><input
@@ -111,7 +125,7 @@
             />Comercial</label
           >
         </fieldset>
-        <br />
+        
       </div>
 
       <div class="botao__alteraDoc">
@@ -187,20 +201,33 @@ export default {
   font-size: 40px;
   text-align: center;
 }
+.container__campos{
+   margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
 .inputs__alteraEnd {
   margin-bottom: 15px;
   width: 150px;
   text-align: center;
+  border: none;
+  border-radius: 50px;
+  height: 2.5vh;
 }
 .digito__alteraEnd {
   width: 30px;
 }
 .numero__alteraEnd {
   width: 40px;
+  height: 2.5vh;
+  border-radius: 10px;
+  border: none;
 }
 .uf__alteraEnd {
   width: 40px;
-  margin-bottom: 10px;
+  height: 2.5vh;
+  border-radius: 10px;
+  border: none;
 }
 .field {
   text-align: center;

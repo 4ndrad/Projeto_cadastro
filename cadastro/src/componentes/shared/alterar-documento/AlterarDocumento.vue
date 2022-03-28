@@ -6,7 +6,7 @@
         <p class="invalide" v-if="mensagemErro">{{ mensagemErro }}</p>
       </div>
 
-      <div id="cadastro__documento">
+      <div id="cadastro__documento" class="cadastro__documento" >
         <fieldset class="field">
           <legend>Qual o tipo do documento ?</legend>
 
@@ -36,7 +36,7 @@
         <div class="erro" v-show="errors.has('numeroDoc')">
           {{ errors.first("numeroDoc") }}
         </div>
-        <div class="documento-campo__numero">
+          
           <label for="numero">Número do Documento</label>
           <input
             type="text"
@@ -49,13 +49,13 @@
             autocomplete="off"
             v-model="documento.numero"
           />
-        </div>
+        
 
         <div class="erro" v-show="errors.has('digitoDoc')">
           {{ errors.first("digitoDoc") }}
         </div>
 
-        <div class="documento-campo__digito">
+        
           <label for="digito">Dígito</label>
           <input
             type="number"
@@ -67,7 +67,7 @@
             autocomplete="off"
             v-model="documento.digito"
           />
-        </div>
+       
 
         <div class="erro" v-show="errors.has('dtExp')">
           {{ errors.first("dtExp") }}
@@ -90,7 +90,7 @@
           {{ errors.first("dtValidade") }}
         </div>
 
-        <div class="campo__validade">
+
           <label for="validade"> Data de Validade</label>
           <input
             type="date"
@@ -103,12 +103,13 @@
             v-model="documento.dtValidade"
             value="yyyy/mm/dd"
           />
-        </div>
+      
 
         <div class="erro" v-show="errors.has('emissor')">
           {{ errors.first("emissor") }}
         </div>
 
+        
         <label for="emissor">Emissor</label>
         <input
           type="text"
@@ -128,7 +129,7 @@
           tipo="button"
           @botaoAtivado="grava(documento)"
           :confirmacao="true"
-          estilo="alterar"
+          estilo="alterarAdmin"
         />
         <router-link :to="{ name: 'admin' }" estilo="perigo"
           ><meu-botao rotulo="Admin" tipo="button" estilo="padrao" />
@@ -177,6 +178,13 @@ export default {
   margin: 0;
   padding: 0;
 }
+
+.cadastro__documento{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .alteraDoc {
   box-sizing: border-box;
   top: 50%;
@@ -188,7 +196,7 @@ export default {
   position: absolute;
   font-family: Arial, Helvetica, sans-serif;
   color: white;
-  background-color: #e64a1aa1;
+  background-color: #d85128f6;
 }
 .titulo__alteraDoc {
   margin-bottom: 40px;
@@ -196,10 +204,15 @@ export default {
   font-size: 40px;
   text-align: center;
 }
+
 .inputs___alteraDoc {
   margin-bottom: 15px;
-  width: 150px;
+  width: 80%;
+  height: 2.6vh;
   text-align: center;
+  border:none;
+  border-radius: 30px;
+  font-size: 11pt;
 }
 
 .field {

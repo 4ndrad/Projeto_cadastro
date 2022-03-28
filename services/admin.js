@@ -3,17 +3,17 @@ const db = require('../config/db');
 
 
 async function getCadastro() {
-    const rows = await db.query(`SELECT idCad, cpfCnpj, nome, sobreNome, razaoSocial, dtNascFund FROM cadastro ORDER BY Nome;`, []);
+    const rows = await db.query(`SELECT idCad, cpfCnpj, nome, sobreNome, razaoSocial, dtNascFund FROM cadastro ORDER BY idCad;`, []);
     return rows;
 }
 
 async function getDocumento() {
-    const rows = await db.query(`SELECT  idCad, idDoc, tipo, numero, digito, dtExp, dtValidade, emissor FROM documento ORDER BY idDoc;`, []);
+    const rows = await db.query(`SELECT  idCad, idDoc, tipo, numero, digito, dtExp, dtValidade, emissor FROM documento;`, []);
     return rows;
 }
 
 async function getEndereco() {
-    const rows = await db.query(`SELECT idEnd, idCad, cep, logradouro, numero, complemento, bairro, municipio ,uf , tipo FROM endereco ORDER BY idEnd;`, []);
+    const rows = await db.query(`SELECT idEnd, idCad, cep, logradouro, numero, complemento, bairro, municipio ,uf , tipo FROM endereco;`, []);
     return rows;
 }
 

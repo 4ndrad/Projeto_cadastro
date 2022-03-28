@@ -6,7 +6,7 @@
         <p class="invalide" v-if="mensagemErro">{{ mensagemErro }}</p>
       </div>
 
-      <div id="cadastro__endereco">
+      <div id="cadastro__endereco" class="cadastro_endereco">
         <label for="cep">CEP</label>
         <input
           type="text"
@@ -20,7 +20,7 @@
           minlength="8"
           maxlength="8"
         />
-        <br />
+
         <label for="logradouro">Logradouro</label>
         <input
           type="text"
@@ -29,20 +29,7 @@
           autocomplete="off"
           v-model="endereco.logradouro"
         />
-        <label for="numero">Número</label>
-        <input
-          type="number"
-          name="numero"
-          v-validate
-          id="numero"
-          class="numero__alteraEnd"
-          autocomplete="off"
-          v-model="endereco.numero"
-          min="1"
-          maxlength="999"
-          required
-        />
-        <br />
+        
         <label for="complemento">Completo</label>
         <input
           type="text"
@@ -51,7 +38,7 @@
           autocomplete="off"
           v-model="endereco.complemento"
         />
-        <br />
+        
         <label for="bairro">Bairro</label>
         <input
           type="text"
@@ -63,7 +50,7 @@
           v-model="endereco.bairro"
           required
         />
-        <br />
+        
         <label for="municipio">Município</label>
         <input
           type="text"
@@ -76,21 +63,37 @@
           required
         />
 
-        <label for="uf">UF</label>
-        <input
-          type="text"
-          name="uf"
-          v-validate
-          id="uf"
-          class="uf__alteraEnd"
-          autocomplete="off"
-          v-model="endereco.uf"
-          minlength="2"
-          maxlength="2"
-        />
-        <br />
+        <div>
+          <label for="uf">UF</label>
+          <input
+            type="text"
+            name="uf"
+            v-validate
+            id="uf"
+            class="uf__alteraEnd"
+            autocomplete="off"
+            v-model="endereco.uf"
+            minlength="2"
+            maxlength="2"
+          />
+
+          <label for="numero">Número</label>
+          <input
+            type="number"
+            name="numero"
+            v-validate
+            id="numero"
+            class="numero__alteraEnd"
+            autocomplete="off"
+            v-model="endereco.numero"
+            min="1"
+            maxlength="999"
+            required
+          />
+        </div>
         <fieldset class="field">
-          <label for="radio-r"
+          <legend>Qual o tipo do endereço</legend>
+          <label for="radio-r" class="label__alteraEnd"
             ><input
               type="radio"
               v-model="endereco.tipo"
@@ -100,7 +103,7 @@
               value="r"
             />Residencial</label
           >
-          <label for="radio-c"
+          <label for="radio-c" class="label__alteraEnd"
             ><input
               type="radio"
               v-model="endereco.tipo"
@@ -111,7 +114,7 @@
             />Comercial</label
           >
         </fieldset>
-        <br />
+        
       </div>
 
       <div class="botao__alteraDoc">
@@ -120,10 +123,10 @@
           tipo="button"
           @botaoAtivado="grava()"
           :confirmacao="true"
-          estilo="alterar"
+          estilo="alterarAdmin"
         />
-        <router-link :to="{ name: 'home' }" estilo="perigo"
-          ><meu-botao rotulo="Home" tipo="button" estilo="padrao" />
+        <router-link :to="{ name: 'admin' }" estilo="perigo"
+          ><meu-botao rotulo="Admin" tipo="button" estilo="padrao" />
         </router-link>
       </div>
     </form>
@@ -168,6 +171,14 @@ export default {
   margin: 0;
   padding: 0;
 }
+
+.cadastro_endereco{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .alteraEnd {
   box-sizing: border-box;
   top: 50%;
@@ -179,7 +190,9 @@ export default {
   position: absolute;
   font-family: Arial, Helvetica, sans-serif;
   color: #ffffff;
-  background-color: #e64a1aa1;
+  background-color: #d85128f6;
+  
+
 }
 .titulo__alteraEnd {
   margin-bottom: 40px;
@@ -189,26 +202,48 @@ export default {
 }
 .inputs__alteraEnd {
   margin-bottom: 15px;
-  width: 150px;
+  width: 65%;
+  height: 2.5vh;
   text-align: center;
+  border: none;
+  border-radius: 35px;
+  font-size: 11pt;
+
 }
 .digito__alteraEnd {
   width: 30px;
+  
 }
 .numero__alteraEnd {
-  width: 40px;
+  width: 90px;
+  margin-bottom: 15px;
+  height: 2.5vh;
+  font-size: 11pt;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
 }
 .uf__alteraEnd {
   width: 40px;
   margin-bottom: 10px;
-}
-.field {
+  height: 2.5vh;
+  font-size: 11pt;
+  border: none;
+  border-radius: 5px;
   text-align: center;
 }
-.radio__alteraEnd {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-left: 20px;
+.field {
+  padding: 0.5em;
+  display: flex;
+  text-align: center;
+}
+
+.label__alteraEnd {
+  margin: 10px;
+}
+
+.radio__alteraEnd{
+  margin: 0 5px;
 }
 .botao__alteraDoc {
   display: flex;

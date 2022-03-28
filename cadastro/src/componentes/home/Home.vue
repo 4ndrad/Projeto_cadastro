@@ -25,6 +25,12 @@
         <div class="dados__usuario">
           <li>
             <h1 class="titulo-dados">Dados do Documento</h1>
+              <router-link :to="{ name: 'inserirDocumento', params: { id: token }}"  class="botao-adicionar-user">
+                  <div class="container-botao">
+                  <meu-botao rotulo="Adicionar novo documento "  tipo="button"  :confirmacao="true"  estilo="insert" /> 
+                  </div>
+                  </router-link>
+        
             <ul v-for="documento of documentos" >
               <div class="central-documento">
                 <li>Tipo: {{ documento.tipo }}</li>
@@ -49,20 +55,13 @@
                     estilo="perigo"
                   />
                 </router-link>
-
-                         <router-link
-                  :to="{
-                    name: 'inserirDocumento',
-                    params: { id: documento.idCad },
-                  }"
-                >
-                  <meu-botao
-                    rotulo="Inserir "
-                    tipo="button"
-                    :confirmacao="true"
-                    estilo="insert"
-                  />
-                </router-link>
+                   <meu-botao
+            rotulo="Remover "
+            tipo="button"
+            @botaoAtivado="removeDocumento()"
+            :confirmacao="true"
+            estilo="perigo"
+          />
               </div>
             </ul>
           </li>
@@ -71,6 +70,12 @@
         <div class="dados__usuario">
           <li>
             <h1 class="titulo-dados">Dados do Endereço</h1>
+            <router-link :to="{ name: 'inserirEndereco', params: { id: token }}" >
+                  <div class="container-botao">
+                  <meu-botao rotulo="Adicionar novo endereços "  tipo="button"  :confirmacao="true"  estilo="insert" /> 
+                  </div>
+                  </router-link>
+                  
             <ul v-for="endereco of enderecos">
               <div class="central-endereco">
                 <li>CEP: {{ endereco.cep }}</li>
@@ -97,20 +102,15 @@
                     estilo="perigo"
                   />
                 </router-link>
+                
+                 <meu-botao
+            rotulo="Remover "
+            tipo="button"
+            @botaoAtivado="removeEndereco()"
+            :confirmacao="true"
+            estilo="perigo"
+          />
 
-                  <router-link
-                  :to="{
-                    name: 'inserirEndereco',
-                    params: { id: endereco.idEnd },
-                  }"
-                >
-                  <meu-botao
-                    rotulo="Inserir "
-                    tipo="button"
-                    :confirmacao="true"
-                    estilo="insert"
-                  />
-                </router-link>
                 
               </div>
             </ul>
@@ -132,13 +132,43 @@ export default {
       cadastros: [],
       documentos: [],
       enderecos: [],
-      token: this.$store.state.idCad,
+      token: this.$store.state.idCad
+      
+      
     };
   },
   methods: {
     Logout() {
       this.$store.commit("DESLOGAR_USUARIO");
       this.$router.push({ name: "login" });
+    },
+    removeEndereco() {
+      this.$http
+        .delete(`endereco/${this.enderecos[0].idEnd}`)
+        .then(
+          () => {
+            alert("Endereço removido com sucesso, logue novamente.");
+          },
+          (err) => {
+            alert("Não foi possível remover o usuario");
+            console.log(err);
+          }
+        );
+        
+    },
+        removeDocumento() {
+      this.$http
+        .delete(`documento/${this.documentos[0].idDoc}`)
+        .then(
+          () => {
+            alert("Documento removido com sucesso, logue novamente.");
+          },
+          (err) => {
+            alert("Não foi possível remover o usuario");
+            console.log(err);
+          }
+        );
+        
     },
   },
   created() {
@@ -166,6 +196,8 @@ export default {
         (err) => console.log(err)
       );
   },
+
+  
 };
 </script>
 
@@ -220,6 +252,11 @@ li {
   justify-content: flex-end;
   padding-top: 10px;
   padding-right: 20px;
+}
+
+.container-botao{
+  position: relative;
+  left: 30%;
 }
 
 .botao__usuario {

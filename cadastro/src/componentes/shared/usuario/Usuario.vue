@@ -34,10 +34,11 @@
           <li>Validade: {{ documento.dtValidade }}</li>
           <li>Emissor: {{ documento.emissor }}</li>
 
+          
           <meu-botao
             rotulo="Remover"
             tipo="button"
-            @botaoAtivado="removeDocumento(cadastro)"
+            @botaoAtivado="removeDocumento(documento)"
             :confirmacao="true"
             estilo="perigo"
           />
@@ -69,7 +70,7 @@
           <meu-botao
             rotulo="Remover "
             tipo="button"
-            @botaoAtivado="removeEndereco(cadastro)"
+            @botaoAtivado="removeEndereco(endereco)"
             :confirmacao="true"
             estilo="perigo"
           />
@@ -98,6 +99,7 @@ export default {
     return {
       cadastros: [],
       filtro: "",
+      
     };
   },
   created() {
@@ -123,11 +125,12 @@ export default {
   },
   methods: {
     removeCadastro(cadastro) {
-      this.$http.delete(`documento/${cadastro.idCad}`).then(() => {
-        console.log("cadastro removido com sucesso");
+      this.$http.delete(`documento/idCad/${cadastro.idCad}`).then(() => {
+        console.log("documento removido com sucesso");
       });
 
-      this.$http.delete(`endereco/${cadastro.idCad}`).then(() => {
+      this.$http.delete(`endereco/idCad/${cadastro.idCad}`).then(() => {
+         console.log("endereco removido com sucess");
         this.$http.delete(`cadastro/${cadastro.idCad}`).then(
           () => {
             let indice = this.cadastros.indexOf(cadastro); // acha a posição da foto na lista
@@ -141,15 +144,16 @@ export default {
             console.log(err);
           }
         );
-        console.log("cadastro removido com sucesso");
+       
       });
     },
-    removeDocumento(cadastro) {
+    removeDocumento(documento) {
       this.$http
-        .delete(`http://localhost:3000/documento/${cadastro.idCad}`)
+        .delete(`http://localhost:3000/documento/${documento.idDoc}`)
         .then(
           () => {
             alert("Documento removido com sucesso, recarregue a página.");
+            
           },
           (err) => {
             alert("Não foi possível remover o usuario");
@@ -157,9 +161,9 @@ export default {
           }
         );
     },
-    removeEndereco(cadastro) {
+    removeEndereco(endereco) {
       this.$http
-        .delete(`http://localhost:3000/endereco/${cadastro.idCad}`)
+        .delete(`http://localhost:3000/endereco/${endereco.idEnd}`)
         .then(
           () => {
             alert("Endereço removido com sucesso, recarregue a página.");

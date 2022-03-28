@@ -1,12 +1,12 @@
 <template>
   <div>
     <form @submit.prevent="grava()" class="alteraDoc">
-      <h1 class="titulo__alteraDoc">Alterar documento</h1>
+      <h1 class="titulo__alteraDoc">Novo documento</h1>
       <div class="invalide">
         <p v-if="mensagemErro">{{ mensagemErro }}</p>
       </div>
 
-      <div id="cadastro__documento">
+      <div id="cadastro__documento" class="cadastro__documento">
         <fieldset class="field">
           <legend>Qual o tipo do documento ?</legend>
 
@@ -31,7 +31,7 @@
             />CNH</label
           >
         </fieldset>
-        <br />
+      
 
         <div class="documento-campo__numero">
           <label for="numero">Número do Documento</label>
@@ -41,13 +41,13 @@
             data-vv-as="Número do Documento"
             data-vv-rules="required|min:7|max:9"
             id="numero"
-            max="11"
+           maxlength="11"
             class="inputs___alteraDoc"
             autocomplete="off"
             v-model="documento.numero"
           />
 
-          <label for="digito">Dígito</label>
+          <label for="digito">.</label>
           <input
             type="number"
             name="digitoDoc"
@@ -60,6 +60,8 @@
           />
         </div>
 
+
+        <div class="documento-campo__numero">
         <label for="data">Data de Expedição</label>
         <input
           type="date"
@@ -72,8 +74,9 @@
           v-model="documento.dtExp"
           value="yyyy/mm/dd"
         />
+        </div>
 
-        <br />
+        <div class="documento-campo__numero">
         <label for="validade"> Data de Validade</label>
         <input
           type="date"
@@ -86,8 +89,9 @@
           v-model="documento.dtValidade"
           value="yyyy/mm/dd"
         />
-        <br />
+        </div>
 
+        <div class="documento-campo__numero">
         <label for="emissor">Emissor</label>
         <input
           type="text"
@@ -97,8 +101,11 @@
           id="emissor"
           class="inputs___alteraDoc"
           autocomplete="off"
+           maxlength="11"
+
           v-model="documento.emissor"
         />
+        </div>
       </div>
 
       <div class="botao__alteraDoc">
@@ -178,14 +185,29 @@ export default {
 }
 .inputs___alteraDoc {
   margin-bottom: 15px;
-  width: 150px;
+  width: 50%;
+  height: 2vh;
+
   text-align: center;
+}
+
+.cadastro__documento{
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
 }
 
 .input__pequeno{
   margin-bottom: 15px;
-  width: 40px;
+  width: 20px;
+  height: 2vh;
   text-align: center;
+}
+
+.documento-campo__numero{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
 }
 
 .field {

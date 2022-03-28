@@ -32,10 +32,20 @@ router.post('/', async function(req, res, next) {
     }
 });
 
+// criando endereço atravez do id
+router.post('/:id', async function(req, res, next) {
+    try{
+        res.json(await endereco.createNewById(req.body ,req.params.id));
+    }catch (err) {
+        console.error('error ao criar endereço', err.message);
+        next(err);
+    }
+});
+
 //PUT
-router.put('/:idCad', async function(req, res, next) {
+router.put('/:id', async function(req, res, next) {
     try {
-        res.json(await endereco.update(req.body, req.params.idCad));
+        res.json(await endereco.update(req.body, req.params.id));
     } catch (err) {
         console.error(`Error ao atualizar endereço`, err.message);
         next(err);
@@ -46,10 +56,20 @@ router.delete("/:id", async function (req, res, next) {
     try {
         res.json(await endereco.deleteEnd(req.params.id));
     } catch (err) {
-        console.error(`Error ao deleted endereço`, err.message);
+        console.error(`Error ao deletar endereço`, err.message);
         next(err);
     }
-})
+});
+
+router.delete("/idCad/:id", async function (req, res, next) {
+    try {
+        res.json(await endereco.deleteEndCad(req.params.id));
+    } catch (err) {
+        console.error(`Error ao deletar endereço`, err.message);
+        next(err);
+    }
+});
+
 
 module.exports = router;
     

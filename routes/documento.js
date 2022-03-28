@@ -30,6 +30,14 @@ router.post('/', async function(req, res) {
     }
 });
 
+router.post('/:id', async function(req, res) {
+    try{
+        res.json(await documento.createNewById( req.body, req.params.id,));
+    }catch (err) {
+        console.error('error ao consultar documento', err.message);       
+    }
+});
+
 router.put('/:id', async function(req, res, next) {
     try {
         res.json(await documento.update(req.body , req.params.id));
@@ -39,9 +47,17 @@ router.put('/:id', async function(req, res, next) {
     }
 }); 
 
-router.delete('/', async function(req, res, next) {
+router.delete('/idCad/:id', async function(req, res, next) {
     try {
-        res.json(await documento.deleteDoc(req.body));
+        res.json(await documento.deleteDoc(req.params.id));
+    } catch (err) {
+        console.error(`Error ao deletar o documento`, err.message);
+        next(err);
+    }
+});
+router.delete('/:id', async function(req, res, next) {
+    try {
+        res.json(await documento.deleteDocById(req.params.id));
     } catch (err) {
         console.error(`Error ao deletar o documento`, err.message);
         next(err);

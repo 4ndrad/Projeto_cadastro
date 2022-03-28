@@ -6,7 +6,7 @@
         <p v-if="mensagemErro">{{ mensagemErro }}</p>
       </div>
 
-      <div id="cadastro__documento">
+      <div id="cadastro__documento" class="cadastro__documento">
         <fieldset class="field">
           <legend>Qual o tipo do documento ?</legend>
 
@@ -20,6 +20,7 @@
               class="radio__alteraDoc"
             />RG</label
           >
+
           <label for="cnh"
             ><input
               type="radio"
@@ -31,9 +32,10 @@
             />CNH</label
           >
         </fieldset>
-        <br />
+        
 
-        <div class="documento-campo__numero">
+
+        <div class="container-campos">
           <label for="numero">Número do Documento</label>
           <input
             type="text"
@@ -41,13 +43,13 @@
             data-vv-as="Número do Documento"
             data-vv-rules="required|min:7|max:9"
             id="numero"
-            max="11"
+            maxlength="11"
             class="inputs___alteraDoc"
             autocomplete="off"
             v-model="documento.numero"
           />
 
-          <label for="digito">Dígito</label>
+          <label for="digito">.</label>
           <input
             type="number"
             name="digitoDoc"
@@ -60,6 +62,7 @@
           />
         </div>
 
+        <div class="container-campos">
         <label for="data">Data de Expedição</label>
         <input
           type="date"
@@ -72,8 +75,9 @@
           v-model="documento.dtExp"
           value="yyyy/mm/dd"
         />
-
-        <br />
+        </div>
+        
+        <div class="container-campos">
         <label for="validade"> Data de Validade</label>
         <input
           type="date"
@@ -86,8 +90,10 @@
           v-model="documento.dtValidade"
           value="yyyy/mm/dd"
         />
-        <br />
+        </div>
 
+
+        <div class="container-campos">
         <label for="emissor">Emissor</label>
         <input
           type="text"
@@ -99,6 +105,7 @@
           autocomplete="off"
           v-model="documento.emissor"
         />
+        </div>
       </div>
 
       <div class="botao__alteraDoc">
@@ -167,8 +174,21 @@ export default {
   position: absolute;
   font-family: Arial, Helvetica, sans-serif;
   color: white;
-  background-color: #e64a1aa1;
+  background-color: #d85128f6;
 }
+
+.cadastro__documento{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.container-campos{
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
 
 .titulo__alteraDoc {
   margin-bottom: 40px;
@@ -178,18 +198,23 @@ export default {
 }
 
 .inputs___alteraDoc {
-  margin-bottom: 15px;
-  width: 150px;
+  width: 45%;
+  height: 2vh;
+  font-size: 11pt;
   text-align: center;
+  border: none;
+  border-radius: 20px;
 }
 
 .input__pequeno{
-  margin-bottom: 15px;
-  width: 40px;
+  font-size: 11pt;
+  width: 1.5em;
   text-align: center;
+  height: 2vh;
 }
 
 .field {
+  margin-bottom: 15px;
   text-align: center;
 }
 

@@ -32,14 +32,13 @@
             />CNH</label
           >
         </fieldset>
-        
-
 
         <div class="container-campos">
           <label for="numero">Número do Documento</label>
           <input
             type="text"
             name="numeroDoc"
+            placeholder="0000000000"
             data-vv-as="Número do Documento"
             data-vv-rules="required|min:7|max:9"
             id="numero"
@@ -49,10 +48,11 @@
             v-model="documento.numero"
           />
 
-          <label for="digito">.</label>
+          <label for="digito">-</label>
           <input
             type="number"
             name="digitoDoc"
+            placeholder="0"
             data-vv-as="Número do Documento"
             data-vv-rules="required|min:1|max:9"
             id="digito"
@@ -63,48 +63,47 @@
         </div>
 
         <div class="container-campos">
-        <label for="data">Data de Expedição</label>
-        <input
-          type="date"
-          name="dtExp"
-          data-vv-as="Data de Expedição"
-          data-vv-rules="required"
-          id="data"
-          class="inputs___alteraDoc"
-          autocomplete="off"
-          v-model="documento.dtExp"
-          value="yyyy/mm/dd"
-        />
-        </div>
-        
-        <div class="container-campos">
-        <label for="validade"> Data de Validade</label>
-        <input
-          type="date"
-          name="dtValidade"
-          data-vv-as="Data de Validade"
-          data-vv-rules="required"
-          id="validade"
-          class="inputs___alteraDoc"
-          autocomplete="off"
-          v-model="documento.dtValidade"
-          value="yyyy/mm/dd"
-        />
+          <label for="data">Data de Expedição</label>
+          <input
+            type="date"
+            name="dtExp"
+            data-vv-as="Data de Expedição"
+            data-vv-rules="required"
+            id="data"
+            class="inputs___alteraDoc"
+            autocomplete="off"
+            v-model="documento.dtExp"
+            value="yyyy/mm/dd"
+          />
         </div>
 
+        <div class="container-campos">
+          <label for="validade"> Data de Validade</label>
+          <input
+            type="date"
+            name="dtValidade"
+            data-vv-as="Data de Validade"
+            data-vv-rules="required"
+            id="validade"
+            class="inputs___alteraDoc"
+            autocomplete="off"
+            v-model="documento.dtValidade"
+            value="yyyy/mm/dd"
+          />
+        </div>
 
         <div class="container-campos">
-        <label for="emissor">Emissor</label>
-        <input
-          type="text"
-          name="emissor"
-          data-vv-as="Emissor"
-          data-vv-rules="required"
-          id="emissor"
-          class="inputs___alteraDoc"
-          autocomplete="off"
-          v-model="documento.emissor"
-        />
+          <label for="emissor">Emissor</label>
+          <input
+            type="text"
+            name="emissor"
+            data-vv-as="Emissor"
+            data-vv-rules="required"
+            id="emissor"
+            class="inputs___alteraDoc"
+            autocomplete="off"
+            v-model="documento.emissor"
+          />
         </div>
       </div>
 
@@ -163,8 +162,10 @@ export default {
   margin: 0;
   padding: 0;
 }
+
 .alteraDoc {
   box-sizing: border-box;
+  width: 36%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -174,26 +175,25 @@ export default {
   position: absolute;
   font-family: Arial, Helvetica, sans-serif;
   color: white;
-  background-color: #d85128f6;
+  background-color: #d85128c4;
 }
 
-.cadastro__documento{
+.cadastro__documento {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.container-campos{
+.container-campos {
   margin: 10px 0;
   display: flex;
   justify-content: space-between;
 }
 
-
 .titulo__alteraDoc {
   margin-bottom: 40px;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 40px;
+  font-size: 35px;
   text-align: center;
 }
 
@@ -203,10 +203,9 @@ export default {
   font-size: 11pt;
   text-align: center;
   border: none;
-  border-radius: 20px;
 }
 
-.input__pequeno{
+.input__pequeno {
   font-size: 11pt;
   width: 1.5em;
   text-align: center;

@@ -129,7 +129,7 @@
           tipo="button"
           @botaoAtivado="grava(documento)"
           :confirmacao="true"
-          estilo="alterarAdmin"
+          estilo="alterar"
         />
         <router-link :to="{ name: 'admin' }" estilo="perigo"
           ><meu-botao rotulo="Admin" tipo="button" estilo="padrao" />

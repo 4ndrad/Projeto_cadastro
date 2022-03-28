@@ -25,13 +25,21 @@
         <div class="dados__usuario">
           <li>
             <h1 class="titulo-dados">Dados do Documento</h1>
-              <router-link :to="{ name: 'inserirDocumento', params: { id: token }}"  class="botao-adicionar-user">
-                  <div class="container-botao">
-                  <meu-botao rotulo="Adicionar novo documento "  tipo="button"  :confirmacao="true"  estilo="insert" /> 
-                  </div>
-                  </router-link>
-        
-            <ul v-for="documento of documentos" >
+            <router-link
+              :to="{ name: 'inserirDocumento', params: { id: token } }"
+              class="botao-adicionar-user"
+            >
+              <div class="container-botao">
+                <meu-botao
+                  rotulo="Adicionar novo documento "
+                  tipo="button"
+                  :confirmacao="true"
+                  estilo="adicionar"
+                />
+              </div>
+            </router-link>
+
+            <ul v-for="documento of documentos">
               <div class="central-documento">
                 <li>Tipo: {{ documento.tipo }}</li>
                 <li>Número: {{ documento.numero }}</li>
@@ -55,13 +63,13 @@
                     estilo="perigo"
                   />
                 </router-link>
-                   <meu-botao
-            rotulo="Remover "
-            tipo="button"
-            @botaoAtivado="removeDocumento()"
-            :confirmacao="true"
-            estilo="perigo"
-          />
+                <meu-botao
+                  rotulo="Remover "
+                  tipo="button"
+                  @botaoAtivado="removeDocumento()"
+                  :confirmacao="true"
+                  estilo="perigo"
+                />
               </div>
             </ul>
           </li>
@@ -70,12 +78,20 @@
         <div class="dados__usuario">
           <li>
             <h1 class="titulo-dados">Dados do Endereço</h1>
-            <router-link :to="{ name: 'inserirEndereco', params: { id: token }}" >
-                  <div class="container-botao">
-                  <meu-botao rotulo="Adicionar novo endereços "  tipo="button"  :confirmacao="true"  estilo="insert" /> 
-                  </div>
-                  </router-link>
-                  
+
+            <router-link
+              :to="{ name: 'inserirEndereco', params: { id: token } }"
+            >
+              <div class="container-botao">
+                <meu-botao
+                  rotulo="Adicionar novo endereço "
+                  tipo="button"
+                  :confirmacao="true"
+                  estilo="adicionar"
+                />
+              </div>
+            </router-link>
+
             <ul v-for="endereco of enderecos">
               <div class="central-endereco">
                 <li>CEP: {{ endereco.cep }}</li>
@@ -102,16 +118,14 @@
                     estilo="perigo"
                   />
                 </router-link>
-                
-                 <meu-botao
-            rotulo="Remover "
-            tipo="button"
-            @botaoAtivado="removeEndereco()"
-            :confirmacao="true"
-            estilo="perigo"
-          />
 
-                
+                <meu-botao
+                  rotulo="Remover "
+                  tipo="button"
+                  @botaoAtivado="removeEndereco()"
+                  :confirmacao="true"
+                  estilo="perigo"
+                />
               </div>
             </ul>
           </li>
@@ -132,9 +146,7 @@ export default {
       cadastros: [],
       documentos: [],
       enderecos: [],
-      token: this.$store.state.idCad
-      
-      
+      token: this.$store.state.idCad,
     };
   },
   methods: {
@@ -143,32 +155,26 @@ export default {
       this.$router.push({ name: "login" });
     },
     removeEndereco() {
-      this.$http
-        .delete(`endereco/${this.enderecos[0].idEnd}`)
-        .then(
-          () => {
-            alert("Endereço removido com sucesso, logue novamente.");
-          },
-          (err) => {
-            alert("Não foi possível remover o usuario");
-            console.log(err);
-          }
-        );
-        
+      this.$http.delete(`endereco/${this.enderecos[0].idEnd}`).then(
+        () => {
+          alert("Endereço removido com sucesso, logue novamente.");
+        },
+        (err) => {
+          alert("Não foi possível remover o usuario");
+          console.log(err);
+        }
+      );
     },
-        removeDocumento() {
-      this.$http
-        .delete(`documento/${this.documentos[0].idDoc}`)
-        .then(
-          () => {
-            alert("Documento removido com sucesso, logue novamente.");
-          },
-          (err) => {
-            alert("Não foi possível remover o usuario");
-            console.log(err);
-          }
-        );
-        
+    removeDocumento() {
+      this.$http.delete(`documento/${this.documentos[0].idDoc}`).then(
+        () => {
+          alert("Documento removido com sucesso, logue novamente.");
+        },
+        (err) => {
+          alert("Não foi possível remover o usuario");
+          console.log(err);
+        }
+      );
     },
   },
   created() {
@@ -196,8 +202,6 @@ export default {
         (err) => console.log(err)
       );
   },
-
-  
 };
 </script>
 
@@ -224,17 +228,17 @@ li {
   margin-left: 20%;
 }
 
-.central-documento{
+.central-documento {
   margin-left: 10%;
 }
 
-.central-endereco{
+.central-endereco {
   margin-left: 13%;
 }
 
 .titulo-dados {
   text-align: center;
-  color: #f8f8ff;
+  color: #e64a1a;
 }
 
 .envolve {
@@ -254,9 +258,11 @@ li {
   padding-right: 20px;
 }
 
-.container-botao{
-  position: relative;
-  left: 30%;
+.container-botao {
+  margin-left: 30%;
+  width: 50%;
+  margin-bottom: 20px;
+  font-size: 15px;
 }
 
 .botao__usuario {

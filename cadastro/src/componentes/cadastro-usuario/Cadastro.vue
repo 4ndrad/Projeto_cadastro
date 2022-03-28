@@ -136,7 +136,7 @@
       <fieldset class="field">
         <legend>Qual o tipo do documento ?</legend>
 
-        <label for="rg"</label>
+        <label for="rg">
           <input
             type="radio"
             name="documento"
@@ -146,9 +146,9 @@
             id="1"
             class="radio"
           />RG
-          
+        </label>
         
-        <label for="cnh"</label>
+        <label for="cnh">
           <input
             type="radio"
             name="documento"
@@ -158,7 +158,7 @@
             id="2"
             class="radio"
           />CNH
-          
+        </label>
       </fieldset>
 
       <br />
@@ -448,20 +448,19 @@
         </div>
       </div>
 
-      
-
       <br />
       <div class="botoes">
-        <input
+        <meu-botao
+          rotulo="Confirmar"
+          tipo="button"
           type="submit"
-          value="Confirmar"
-          class="botao__cadastro"
+          estilo="perigo"
           @click="confirmacao()"
         />
         <br />
-        <router-link :to="{ name: 'login' }" tag="button" class="botao__login"
-          >Login</router-link
-        >
+         <router-link :to="{ name: 'login' }" estilo="perigo"
+          ><meu-botao rotulo="Login" tipo="button" estilo="padrao" />
+        </router-link>
       </div>
     </form>
   </div>
@@ -471,8 +470,12 @@
 import Cadastro from "../../domain/dados/Cadastro";
 import Documento from "../../domain/dados/Documento";
 import Endereco from "../../domain/dados/Endereco";
+import Botao from "../shared/botao/Botao.vue";
 
 export default {
+  components: {
+    "meu-botao": Botao,
+  },
   data() {
     return {
       cadastro: new Cadastro(),
@@ -531,7 +534,7 @@ export default {
   margin: auto;
   margin-top: 30px;
   margin-bottom: 30px;
-  width: 38%;
+  width: 36%;
   padding: 1em 3.5em;
   border-radius: 20px;
   border: solid;
@@ -633,35 +636,7 @@ export default {
 .botoes {
   display: flex;
   justify-content: space-around;
+  font-size: 15px;
 }
 
-.botao__cadastro {
-  padding: 12px;
-  width: 100px;
-  background-color: #e64a1a;
-  color: white;
-  border: none;
-  border-radius: 10px;
-}
-
-input[type="submit"]:hover {
-  font-weight: bold;
-  color: white;
-  background-color: #e64a1a;
-}
-
-.botao__login {
-  padding: 12px;
-  width: 100px;
-  background-color: #1958ab;
-  border: none;
-  border-radius: 10px;
-  color: #ffffff;
-}
-
-button:hover {
-  font-weight: bold;
-  color: white;
-  background-color: #1958ab;
-}
 </style>

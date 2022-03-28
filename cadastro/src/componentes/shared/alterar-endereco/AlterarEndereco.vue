@@ -7,6 +7,30 @@
       </div>
 
       <div id="cadastro__endereco" class="cadastro_endereco">
+        <fieldset class="field">
+          <legend>Qual o tipo do endereço</legend>
+          <label for="radio-r" class="label__alteraEnd"
+            ><input
+              type="radio"
+              v-model="endereco.tipo"
+              id="A"
+              class="radio__alteraEnd"
+              name="myGroup"
+              value="r"
+            />Residencial</label
+          >
+          <label for="radio-c" class="label__alteraEnd"
+            ><input
+              type="radio"
+              v-model="endereco.tipo"
+              id="B"
+              class="radio__alteraEnd"
+              name="myGroup"
+              value="c"
+            />Comercial</label
+          >
+        </fieldset>
+
         <label for="cep">CEP</label>
         <input
           type="text"
@@ -91,29 +115,7 @@
             required
           />
         </div>
-        <fieldset class="field">
-          <legend>Qual o tipo do endereço</legend>
-          <label for="radio-r" class="label__alteraEnd"
-            ><input
-              type="radio"
-              v-model="endereco.tipo"
-              id="A"
-              class="radio__alteraEnd"
-              name="myGroup"
-              value="r"
-            />Residencial</label
-          >
-          <label for="radio-c" class="label__alteraEnd"
-            ><input
-              type="radio"
-              v-model="endereco.tipo"
-              id="B"
-              class="radio__alteraEnd"
-              name="myGroup"
-              value="c"
-            />Comercial</label
-          >
-        </fieldset>
+        
         
       </div>
 
@@ -123,7 +125,7 @@
           tipo="button"
           @botaoAtivado="grava()"
           :confirmacao="true"
-          estilo="alterarAdmin"
+          estilo="alterar"
         />
         <router-link :to="{ name: 'admin' }" estilo="perigo"
           ><meu-botao rotulo="Admin" tipo="button" estilo="padrao" />
@@ -236,6 +238,7 @@ export default {
   padding: 0.5em;
   display: flex;
   text-align: center;
+  margin-bottom: 10px;
 }
 
 .label__alteraEnd {
